@@ -1,5 +1,5 @@
 # Report "Data Science Toolkits and Architectures"
-#### Jan Murer, Frederik Poschenrieder, Jessica Ugowe
+#### Jan Murer (17-100-777), Frederik Poschenrieder (XX-XXX-XXX), Jessica Ugowe (XX-XXX-XXX)
 
 ## Milestone 1
 
