@@ -15,43 +15,41 @@ This milestone within our project focuses on a hands-on approach to understandin
 ## Setup
 
 1. **Install Virtual Studio** 
-If not installed kindly use the link below
+
+    If not installed kindly use the link below
 
     https://code.visualstudio.com/Download
 
 2. **Installing Python**
-Install by running the following command in your terminal**
 
-    brew install python
+    Install by running the following command in your terminal**
+
+    `brew install python`
 
 3. **Create a virtual environemnt**
 
-    python -m venv .venv
-
-4. **Installing Python**
-Install by running the following command in your terminal**
-
-    brew install python
+    `python -m venv .venv`
 
 4. **Clone the repository using**
 
-    git clone https://github.com/janmurer/DataScienceToolkits.git
+    `git clone https://github.com/janmurer/DataScienceToolkits.git`
 
 5. **Open the respective directory in Virtual Studio** 
+
 This is the directory or folder where you cloned the repository into in File explorer. 
  
 6. **Activate the virtual environment**
  Run the following command in your terminal
 
-    source venv/bin/activate
+    `source venv/bin/activate`
 
 8. **Install the required Libraries**
     
-     pip install -r requirements.txt
+     `pip install -r requirements.txt`
 
 7. **Run the code**
 
-    python mnist_convnet.py
+    `python mnist_convnet.py`
 
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
