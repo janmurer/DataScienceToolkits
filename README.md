@@ -40,7 +40,7 @@ This milestone within our project focuses on a hands-on approach to understandin
  
 6. **Activate the virtual environment**
 
- Run the following command in your terminal
+    Run the following command in your terminal
 
     `source venv/bin/activate`
 
