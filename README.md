@@ -44,16 +44,11 @@ This milestone within our project focuses on a hands-on approach to understandin
 
     `source venv/bin/activate`
 
-7. **Navigate to the directory of the milestone_1 folder**
-
-    This is the folder where the requirements are stored in.
-
 8. **Install the required Libraries**
     
      `pip install -r requirements.txt`
 
-
-9. **Run the code**
+7. **Run the code**
 
     `python mnist_convnet.py`
 
