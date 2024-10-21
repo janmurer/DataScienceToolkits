@@ -91,9 +91,6 @@ The key dependencies for this task include **NumPy** for numerical operations, a
 ## Conclusion
 This milestone not only familiarised us with the operational aspect of running deep learning scripts but also showed us the importance of having a stable development environent. Through teamwork, we were able to significantly deepen our understanding of neural network applications in image classification.
 
-To run the code, we opened the respective directory in Visual Studio Code and ran it by activating our virtual environment (`source venv/bin/activate`). After running the code we added some comments about what certain bits of the code do. This was then pushed to the GitHub repository. After interpreting the results, we duplicated the script and modified it slightly to run the same script with different data. This time we tried the fashion_mnist dataset that is also available using `keras.datasets.fashion_mnist.load_data()`. Without further modification the model scored an accuracy of roughly 89%, which is surprisingly good. Jan tried to train a model to the exact same data-set for the course "Unsupervised Machine Learning" which (after loads of code optimization) yielded him an accuracy of roughly 50%, which is surprisingly bad. 
-
-
 ## References
 
 1. Digital Ocean: https://www.digitalocean.com/community/tutorials/mnist-dataset-in-python
