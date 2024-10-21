@@ -1,7 +1,7 @@
 # Milestone 1
 
 ## Overview 
-This milestone within our project focuses on a hands-on approach to understanding and implementing a neural network using the MNIST dataset. The primary goal is to checkout (download) the `mnist_convnet.py` script, execute it on our machines, and propely document our processes and findings. 
+This milestone within our project focuses on a hands-on approach to understanding and implementing a neural network using the MNIST dataset. The primary goal is to checkout (download) the `mnist_convnet.py` script, execute it on our machines, and properly document our processes and findings. 
 
 
 ## Folder Structure
@@ -22,7 +22,7 @@ This milestone within our project focuses on a hands-on approach to understandin
 
 2. **Installing Python**
 
-    Install by running the following command in your terminal**
+    Install by running the following command in your terminal (macoOS/Linux only - install Homebrew first, if not already installed). We recommend to install Python 3.12.4.
 
     `brew install python`
 
@@ -36,9 +36,10 @@ This milestone within our project focuses on a hands-on approach to understandin
 
 5. **Open the respective directory in Virtual Studio** 
 
-This is the directory or folder where you cloned the repository into in File explorer. 
+    This is the directory or folder where you cloned the repository into in File explorer. 
  
 6. **Activate the virtual environment**
+
  Run the following command in your terminal
 
     `source venv/bin/activate`
