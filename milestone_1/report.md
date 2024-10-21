@@ -5,6 +5,7 @@
 # Milestone_1 
 
 ## Introduction
+
 This milestone uses the MNIST dataset which is short for "Modified National Institute of Standards and Technology".[1] MNIST was constructed from the National Institute of Standards and Technology (NIST) Special Database 3 (SD-3) and Special Databse 1 (SD-1) by remixing the samples which were taken from American Census Bureau employess and high school students [2]. This dataset contains a massive collection of handwritten digits used to train various image processing systems and it is one of the most popular image recognition dataset.
 
 **Objective**: The goal of this milestone is to checkout ('download') the `mnist_covnet.py code`, run it on our machines and report our processes and findings.
@@ -60,7 +61,7 @@ Post- initial testing, the script was adapted to run `fashion_mnist` dataset tha
 
 Successfully we ran the code on multiple machines (including VM's) using Python 3.12.4 (respectively Python 3.12.7 on the virtual machine) with all the required packages in the requirements.txt file and we used `python --version` to find out what version of Python was installed on our systems. Although the virtual machine was running a slightly older version of python, no problems were faced while running the code. 
 
-### Findings
+## Findings
 
 As already described in the dataset section, the input for the model consists of handwritten digits with 28x28 pixels, which are represented to the neural network as an array of shape (28, 28, 1), where 28x28 indicates the pixel dimensions, and the extra dimension (1) signifies that the images are grayscale. 
 
@@ -86,8 +87,11 @@ The key dependencies for this task include **NumPy** for numerical operations, a
 
 - **Solution**: To prevent major mistakes such as accidentally wiping the system, we prefer using MacOS to complete the milestones. If passing a milestone requires the use of a Linux distribution we have virtual machines that emulate Fedora and Ubuntu. 
 
+
 ## Conclusion
 This milestone not only familiarised us with the operational aspect of running deep learning scripts but also showed us the importance of having a stable development environent. Through teamwork, we were able to significantly deepen our understanding of neural network applications in image classification.
+
+To run the code, we opened the respective directory in Visual Studio Code and ran it by activating our virtual environment (`source venv/bin/activate`). After running the code we added some comments about what certain bits of the code do. This was then pushed to the GitHub repository. After interpreting the results, we duplicated the script and modified it slightly to run the same script with different data. This time we tried the fashion_mnist dataset that is also available using `keras.datasets.fashion_mnist.load_data()`. Without further modification the model scored an accuracy of roughly 89%, which is surprisingly good. Jan tried to train a model to the exact same data-set for the course "Unsupervised Machine Learning" which (after loads of code optimization) yielded him an accuracy of roughly 50%, which is surprisingly bad. 
 
 
 ## References
