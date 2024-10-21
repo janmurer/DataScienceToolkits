@@ -47,7 +47,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 """
 ## Build the model
 """
-# The architecture of the model is defined. I cannot explain in detail what happens in this part of the code. I suppose there is some dimensionality reduction and some prevention of overfitting happening. As far as I understood, parameters are often guided by best practices and intuition/trial and error.
+# The architecture of the model is defined. 
 model = keras.Sequential(
     [
         keras.Input(shape=input_shape),
