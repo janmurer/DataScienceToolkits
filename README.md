@@ -1,4 +1,3 @@
-
 # Milestone 1
 
 ## Overview 
@@ -55,4 +54,3 @@ This milestone within our project focuses on a hands-on approach to understandin
 
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
-
