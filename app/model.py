@@ -14,9 +14,9 @@ def build_model(input_shape=(28, 28, 1), num_classes=10):
     ])
     return model
 
-def save_model(model, filepath="mnist_model.h5"):
+def save_model(model, filepath="models/mnist_model.h5"):
     model.save(filepath)
     print(f"Model saved to '{filepath}'.")
 
-def load_trained_model(filepath="mnist_model.h5"):
+def load_trained_model(filepath="models/mnist_model.h5"):
     return load_model(filepath)
