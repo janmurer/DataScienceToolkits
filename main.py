@@ -18,11 +18,10 @@ def main():
     print("Model trained.")
 
     print("Saving model...")
-    save_model(model, "mnist_model.h5")
-    print("Model saved to mnist_model.h5")
+    save_model(model)
 
     print("Loading the trained model...")
-    loaded_model = load_trained_model("mnist_model.h5")
+    loaded_model = load_trained_model()
     print("Model loaded.")
 
     print("Evaluating model...")
