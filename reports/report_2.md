@@ -29,6 +29,8 @@ Make sure your code has the following functionality (extend if necessary):
 - Can save a fitted model to a ".h5" file (or saved model type for newer Tensorflow 2.0 versions) - Can load a ".h5" file, using Keras (or saved model type for newer Tensorflow 2.0 versions)
 - Can perform predictions using a "fitted" model, using Keras
 
+DONE
+
 ## Task 4
 
 Your code bases are badly structured, as they are essentially a script, which is read top down. This creates Python files that are large and not maintainable. It is good practice to create modules that contain code snippets which "logically" belong together. The modules contain python functions that are imported by other modules and scripts, where they are executed.
@@ -37,13 +39,21 @@ Your code bases are badly structured, as they are essentially a script, which is
 - The modules usually contain imports (from other modules / packages) and functions (for example "def create_neuralnet(): ...")
 - Ensure PEP8 conformity
 
+DONE. PEP8 conformity was ensured using the packages isort, black and flake8
+
 
 ## Task 5
 
 Create a pip "requirements file" for your code base and explain how you make it work within a virtualenv (step by step).
+
+DONE
 
 ## Task 6
 
 "Dockerize" your code:
 - Install Docker on your machines
 - Create a Dockerfile that installs all necessary dependencies and is capable of running Tensorflow/Keras in CPU mode (GPU mode is not necessary).
+
+DONE
+
+docker buildx build -t mnist_app . to build the docker image. 
