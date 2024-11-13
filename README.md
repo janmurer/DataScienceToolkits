@@ -102,7 +102,7 @@ The goal of milestone_1 is to checkout code (https://github.com/keras-team/keras
 
 ### Overview
 
-In this milestone we should refract the code (mnist.covnet.py) from the previous milestone into several modules. Furthermore, the application should be "dockerized" to address the problem "It works on my machine ¯\_(ツ)_/¯".
+In this milestone we should refract the code (mnist.covnet.py) from the previous milestone into several modules. Furthermore, the application should be "dockerized" to address the problem "It works on my machine ¯\\\_(ツ)\_/¯".
 
 ### Setup
 
