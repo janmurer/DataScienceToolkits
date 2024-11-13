@@ -7,7 +7,7 @@ Welcome to our GitHub repository. This repository serves as a central hub for sh
 ## Repository Structure
 
 The repository is organized as follows:
-
+```plaintext
 ├── app/
 │   ├── __init__.py
 │   ├── data_loader.py
@@ -25,7 +25,7 @@ The repository is organized as follows:
 ├── README.md
 ├── main.py
 └── requirements.txt
-
+    
     - app/: Contains all modules for our application to work
     - reports/: Contains markdown files documenting the process of our work on milestones and logs findings and challenges we faced completing the milestones
     - src/: Contains the foundational code for our application
@@ -101,7 +101,7 @@ The goal of milestone_1 is to checkout code (https://github.com/keras-team/keras
 
 ### Overview
 
-In this milestone we should refract the code (mnist.covnet.py) from the previous milestone into several modules. Furthermore, the application should be "dockerized" to address the problem "It works on my machine ¯\_(ツ)_/¯"
+In this milestone we should refract the code (mnist.covnet.py) from the previous milestone into several modules. Furthermore, the application should be "dockerized" to address the problem "It works on my machine ¯\_(ツ)_/¯".
 
 ### Setup
 
@@ -113,36 +113,23 @@ Assuming you completed all setup-steps from Milestone 1:
 
     https://docs.docker.com/get-started/get-docker/
 
-2. **Installing Python**
+    Make sure the application is running in order to proceed with the next steps
 
-    Install by running the following command in your terminal (macoOS/Linux only - install Homebrew first, if not already installed). We recommend to install Python 3.12.4.
-
-    `brew install python`
-
-3. **Create a virtual environemnt**
-
-    `python -m venv .venv`
-
-4. **Clone the repository using**
+2. **Clone the repository using**
 
     `git clone https://github.com/janmurer/DataScienceToolkits.git`
 
-5. **Open the respective directory in Virtual Studio** 
+3. **Open the respective directory in Virtual Studio** 
 
     This is the directory or folder where you cloned the repository into in File explorer. 
  
-6. **Activate the virtual environment**
-
-    Run the following command in your terminal
-
-    `source venv/bin/activate`
-
-8. **Install the required Libraries**
+4. **Build the Docker image**
     
-     `pip install -r requirements.txt`
+    `docker buildx build -t mnist_app`
 
-7. **Run the code**
+5. **Run the Docker image**
 
-    `python mnist_convnet.py`
+    `docker run mnist_app`
+
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
