@@ -12,6 +12,8 @@ In case you haven’t done it yet, in this task we ask you to write an appropria
 It is important that you version-control the ".gitignore". Do not share it with each other by other means than Git (for example not per E-mail or Slack!). You need to find an appropriate branching strategy for your team to share additions to and deletions from the ".gitignore", while you work on separate feature branches.
 Add to the report how you shared changes in the ".gitignore", while you were working on different feature branches (essentially without having to constantly do pull requests into the main/master branch for simple changes to the ".gitignore"). Or, how would you do it?
 
+We restructured our GitHub repository in order to work the "git"-way. New feature branches should be derived from the dev branch which should always contain the most up-to-date version of our code. 
+
 ## Task 2
 
 Add the answers to the following questions to your report:
@@ -20,6 +22,7 @@ Add the answers to the following questions to your report:
 - What is your preference concerning the use of Python virtualenv and Docker? When would you use one or the other?
 - What is the Docker build context?
 - How can you assess the quality of a python package on PyPI?
+
 
 ## Task 3
 
@@ -39,14 +42,20 @@ Your code bases are badly structured, as they are essentially a script, which is
 - The modules usually contain imports (from other modules / packages) and functions (for example "def create_neuralnet(): ...")
 - Ensure PEP8 conformity
 
-DONE. PEP8 conformity was ensured using the packages isort, black and flake8
+We refracted the original code into several modules. __init__.py imports/evokes the neccessary functions from all the modules. The script main.py "glues" the application together. PEP8 conformity was ensured using the packages isort, black and flake8.
 
 
 ## Task 5
 
 Create a pip "requirements file" for your code base and explain how you make it work within a virtualenv (step by step).
 
-DONE
+We printed the required packages and dependencies for our application by running the command `pip freeze`
+in the terminal (the virtual environement must be active). This prints all required packages and the respective versions. 
+
+The terminal output can be copied and pasted in a file named requirements.in. From there on we used a package called pip-tools and used the command `pip-compile --generate-hashes requirements.in` to generate a requirements.txt including the respecting hashes. 
+
+For some reason the tool was not able to generate hashes for the package setuptools. We had to manually add the hash for this packages by checking the package on PyPI (https://pypi.org/project/pip/) and download it from there. Then we directly calulated the hash using the tool shasum with the command `shasum -a 256 setuptools-75.2.0.tar.gz`. We manually added the terminal output to our requirements.txt.
+
 
 ## Task 6
 
@@ -54,6 +63,4 @@ DONE
 - Install Docker on your machines
 - Create a Dockerfile that installs all necessary dependencies and is capable of running Tensorflow/Keras in CPU mode (GPU mode is not necessary).
 
-DONE
-
-docker buildx build -t mnist_app . to build the docker image. 
+To build and run the docker image, please refer to the Setup section in the README.md file at the root of this GitHub repository.
