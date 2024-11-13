@@ -27,10 +27,10 @@ The repository is organized as follows:
 └── requirements.txt
 ```
     
-    - app/: Contains all modules for our application to work
-    - reports/: Contains markdown files documenting the process of our work on milestones and logs findings and challenges we faced completing the milestones
-    - src/: Contains the foundational code for our application
-    - requirements.txt: List of packages and dependencies to run the application
+* app/: Contains all modules for our application to work
+* reports/: Contains markdown files documenting the process of our work on milestones and logs findings and challenges we faced completing the milestones
+* src/: Contains the foundational code for our application
+* requirements.txt: List of packages and dependencies to run the application
 
 ## Getting Started
 
