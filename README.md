@@ -25,6 +25,7 @@ The repository is organized as follows:
 ├── README.md
 ├── main.py
 └── requirements.txt
+```
     
     - app/: Contains all modules for our application to work
     - reports/: Contains markdown files documenting the process of our work on milestones and logs findings and challenges we faced completing the milestones
