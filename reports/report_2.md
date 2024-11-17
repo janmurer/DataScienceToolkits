@@ -117,11 +117,8 @@ The Docker build context is the set of files and directories that are accessible
 
 ## Task 3. Functional Code Requirements
 
-**Features Implemented**
-- Data loading.
-- Neural network training (TensorFlow/Keras).
-- Model saving (`.h5` or saved model type for newer Tensorflow 2.0 versions).
-- Model loading and prediction functionality.
+We added created a function that stores the model to a newly created folder called "models".
+Initially we stored the file as h5 as outlined in the exercise, but this gave as a warning, saying h5 is a deprecated format. After we got the ok from the lecturers we changed the file format to the newer .keras format.
 
 ---
 
