@@ -1,9 +1,6 @@
 # main.py
 
-from app.data_loader import load_data
-from app.model import build_model, load_trained_model, save_model
-from app.trainer import compile_model, evaluate_model, train_model
-
+from app import load_data, build_model, load_trained_model, save_model, compile_model, evaluate_model, train_model
 
 def main():
     print("Starting data loading...")
