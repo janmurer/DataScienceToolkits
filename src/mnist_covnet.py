@@ -14,8 +14,8 @@ Accelerator: GPU
 
 # Import the required libraries. Numpy is used to work with arrays. Keras is used to create and train neural networks.
 
-import numpy as np
 import keras
+import numpy as np
 from keras import layers
 
 """
@@ -23,10 +23,12 @@ from keras import layers
 """
 
 # Model / data parameters
-num_classes = 10 # Number of classes represents the 10 possible output classes (digits 0-9)
-input_shape = (28, 28, 1) # 28x28 pixel images with 1 channel (grayscale)
+num_classes = (
+    10  # Number of classes represents the 10 possible output classes (digits 0-9)
+)
+input_shape = (28, 28, 1)  # 28x28 pixel images with 1 channel (grayscale)
 
-# Load the data and split it between train and test sets. The MNIST dataset is loaded from Keras built in datasets. 
+# Load the data and split it between train and test sets. The MNIST dataset is loaded from Keras built in datasets.
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 
 # Scale images to the [0, 1] range. The pixel values are casted to floating point numbers and divided by 255 to scale them to the range [0, 1]. As the input pictures are grayscale, the pixel values range from 0 to 255.
@@ -47,7 +49,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 """
 ## Build the model
 """
-# The architecture of the model is defined. 
+# The architecture of the model is defined.
 model = keras.Sequential(
     [
         keras.Input(shape=input_shape),
@@ -66,7 +68,7 @@ model.summary()
 """
 ## Train the model
 """
-# Batch size and number of epochs are defined. The model is trained on miti-batches of 128 samples for 15 epochs. 10% of the training data is used for validation. 
+# Batch size and number of epochs are defined. The model is trained on miti-batches of 128 samples for 15 epochs. 10% of the training data is used for validation.
 batch_size = 128
 epochs = 15
 
