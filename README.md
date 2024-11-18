@@ -126,7 +126,7 @@ Assuming you completed all setup-steps from Milestone 1:
  
 4. **Build the Docker image**
     
-    `docker buildx build -t mnist_app`
+    `docker build -t mnist_app .`
 
 5. **Run the Docker image**
 
