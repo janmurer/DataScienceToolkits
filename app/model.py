@@ -20,8 +20,13 @@ def build_model(input_shape=(28, 28, 1), num_classes=10):
     return model
 
 def save_model(model, filepath="models/mnist_model.keras"):
+    """
+    Save the model to the specified filepath. The format is inferred from the file extension.
+    """
+    import os
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    
+
+    # Save the model (file format is inferred from the file extension)
     model.save(filepath)
     print(f"Model saved to '{filepath}'.")
 

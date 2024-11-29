@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# Export W&B token from .env file
-source .env
-export WANDB_API_KEY=$WANDB_TOKEN
+# Load environment variables from the .env file
+if [ -f .env ]; then
+    export $(cat .env | xargs)
+fi
 
-# Log into W&B
-wandb login $WANDB_API_KEY
+# Login to W&B
+wandb login $WANDB_TOKEN
 
 # Execute the container's command
 exec "$@"
