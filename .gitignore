@@ -176,6 +176,11 @@ cython_debug/
 # requirements.in
 requirements.in
 
+<<<<<<< HEAD
 # postgres_data is a drectory that contains the internal files and data of the PostgreSQL database.
 postgres_data/
 postgres_data
+=======
+# docker entrypoint
+docker_entrypoint.sh
+>>>>>>> 01e78e3 (remove docker_entrypoint.sh, update .gitignore)
