@@ -1,0 +1,20 @@
+# Base image
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy local files to container
+COPY . /app
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Add entrypoint script
+COPY docker_entrypoint.sh /app/
+
+# Make the script executable
+RUN chmod +x /app/docker_entrypoint.sh
+
+# Entry point script
+ENTRYPOINT ["/app/docker_entrypoint.sh"]
