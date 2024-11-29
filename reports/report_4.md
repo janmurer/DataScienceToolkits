@@ -28,11 +28,20 @@ A metric is a qunatitative measure used to evaluate the performance of a model. 
 
 - Trade-off: Increasing precision often reduces recall and vice versa. By simply classifing everything as Positive one would achieve a Recall of 1, but an essentially useless model. High precesion means fewer false positives and a high recall means fewer false negatives. How the metrics are interpreted ultimately depends on the use case of the model. In medical applications eliminating minimizing false negatives may be more important than false positives, whereas in credit assessment classification minimizing false positives (garanting a credit to a "bad" lender) may be more important.
 
-**What is AUROC Metric?**
+**What is AUROC (Area under Receiver Operating Characteristic Curve) Metric?**
 
+The AUROC measures a model's abilitiy to distingish between classes. It represents the area under the ROC curve, where the curve plots the true positive rate against the false positive rate. 
+
+![AUROC](https://glassboxmedicine.com/wp-content/uploads/2019/02/roc-curve-v2.png)
 
 **What is a Confusion Matrix?**
 
+A confusion matrix is a summary table used to evaluate the performance of a classification model. It shows the counts of correct and incorrect predictions for each class. 
+
+|                | Predicted Positive | Predicted Negative |
+|----------------|--------------------|--------------------|
+| **Actual Positive** | True Positive (TP)   | False Negative (FN)  |
+| **Actual Negative** | False Positive (FP)  | True Negative (TN)   |
 
 ## Task 2: 
 Instrument your code with Weights & Biases (within a Docker container). Choose an appropriate metric for optimizing your ML Model. What is the reasoning behind it?
