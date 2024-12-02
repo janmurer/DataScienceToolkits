@@ -12,6 +12,16 @@
 
 Experiment management seeks to track progress and experiments systematically. It is used to organize code versions, datasets, hyperparameters, metrics and results. This is mainly to ensure reproducibility, efficiency and collaboration. In easier terms, filenaming such as 'machine_learning_model_xy_v7_final_version2_approved.py' shall be prevented.
 
+In a nutshell tools like WANDB.ai help with:
+- Experiment Tracking
+    - Logs of all relevant details about the experiments (hyperparameters, metrics, model configurations)
+- Visualization of Metrics
+- Collaboration and Reproducibility
+    - Experiemnt data can be stored on the cloud.
+- Model Versioning
+    - Management of trained models and datasets
+- Scalability
+
 **What is a Metric in ML?**
 
 A metric is a qunatitative measure used to evaluate the performance of a model. Metrics also help to compare different models against each other.
@@ -44,6 +54,11 @@ A confusion matrix is a summary table used to evaluate the performance of a clas
 | **Actual Negative** | False Positive (FP)  | True Negative (TN)   |
 
 ## Task 2: 
+
+**Choose an appropriate metric for optimizing your ML Model. What is the reasoning behind it?**
+
+The MNIST dataset is balanced, all classes are equally represented in the data. Therefore, the chosen metric for optimization is Accuracy. Accuracy offers a great interpretability and is a rather straightforward metric. Lastly accuracy is a standard metric in benchmarks for MNIST and allows for seamingless comparison among different models and architectures. 
+
 Instrument your code with Weights & Biases (within a Docker container). Choose an appropriate metric for optimizing your ML Model. What is the reasoning behind it?
 Note you can make a new Dockerfile (you don’t need to use docker-compose)
 Your code should:

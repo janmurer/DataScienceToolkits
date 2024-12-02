@@ -132,5 +132,41 @@ Assuming you completed all setup-steps from Milestone 1:
 
     `docker run mnist_app`
 
+
+## Milestone 4
+
+### Overview
+
+In this milestone we should create a wandb-account to essentially log and visualize the performance of our MNIST-model. 
+
+### Setup
+
+Assuming you completed all setup-steps from Milestone 1-3:
+
+
+1. **Clone the repository using**
+
+    `git clone https://github.com/janmurer/DataScienceToolkits.git`
+
+2. **Open the respective directory in Virtual Studio** 
+
+    This is the directory or folder where you cloned the repository into in File explorer. 
+
+3. **Store your wandb key in an .env file at the root of your directory**
+
+    `WANDB_TOKEN=YourActualWANDBAPIKey`
+
+    Make sure to never share/publish your token. Otherwhise bad things will happen. 
+
+4. **Build the Docker image**
+    
+    `docker build -t mnist_wandb .`
+
+5. **Run the Docker container**
+
+    `docker run --env-file .env mnist_wandb`
+
+6. **See and track the performance of your model on wandb.ai**
+
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
