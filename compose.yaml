@@ -1,0 +1,39 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      
+  jokes:
+    build:
+      context: .  
+      dockerfile: jokes/Dockerfile
+    ports:
+      - "8001:8000"  # Adjust as necessary
+    environment:
+      - PYTHONPATH=/jokes
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ms3_jokes
+    ports:
+      - 5432:5432
+    restart: always
+   
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    depends_on: 
+      - db
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
