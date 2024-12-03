@@ -5,7 +5,7 @@ FROM python:3.12-slim
 WORKDIR /jokes
 
 # Copy the application files
-COPY ../jokes_main.py /jokes/jokes_main.py
+COPY app/jokes_main.py /jokes/jokes_main.py
 
 # Copy requirements.txt from tjhe parent directory to the container
 COPY ../requirements.txt /jokes/requirements.txt
