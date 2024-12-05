@@ -111,7 +111,3 @@ def fetch_first_joke(database, user, host, password, port):
         if 'conn' in locals() and conn:
             conn.close()
 
-
-# Execute the two functions
-setup_jokes_database(database, user, host, password, port)
-fetch_first_joke(database, user, host, password, port)
