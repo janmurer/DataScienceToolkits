@@ -175,4 +175,4 @@ cython_debug/
 requirements.in
 
 # docker entrypoint
-docker_entrypoint.sh
+# docker_entrypoint.sh
