@@ -8,14 +8,14 @@ services:
     environment:
       - PYTHONPATH=/app
   
-  jokes:
-    build:
-      context: .  
-      dockerfile: jokes/Dockerfile
-    ports:
-      - "8001:8000" 
-    environment:
-      - PYTHONPATH=/jokes
+#  jokes:
+#    build:
+#      context: .  
+#      dockerfile: jokes/Dockerfile
+#    ports:
+#      - "8001:8000" 
+#    environment:
+#      - PYTHONPATH=/jokes
 
   db:
     image: postgres:latest
