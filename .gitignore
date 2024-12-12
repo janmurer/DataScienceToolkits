@@ -182,5 +182,9 @@ postgres_data/
 postgres_data
 =======
 # docker entrypoint
+<<<<<<< HEAD
 docker_entrypoint.sh
 >>>>>>> 01e78e3 (remove docker_entrypoint.sh, update .gitignore)
+=======
+# docker_entrypoint.sh
+>>>>>>> e2f57ea (update gitignore, add docker_entrypoint.sh)
