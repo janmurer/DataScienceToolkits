@@ -217,7 +217,7 @@ Assuming you completed all setup-steps from Milestone 1-3:
 
 4. **Build the Docker image**
     
-    `docker build -t mnist_wandb .`
+    `docker build -f wandb/Dockerfile -t mnist_wandb .`
 
 5. **Run the Docker container**
 
