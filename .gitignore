@@ -129,6 +129,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+milestone_3.env
+ms3_mnist.env
 
 # Spyder project settings
 .spyderproject
@@ -173,3 +175,7 @@ cython_debug/
 
 # requirements.in
 requirements.in
+
+# postgres_data is a drectory that contains the internal files and data of the PostgreSQL database.
+postgres_data/
+postgres_data
