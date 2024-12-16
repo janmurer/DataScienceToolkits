@@ -8,9 +8,10 @@ from psycopg2 import sql
 from keras.models import load_model
 from keras.datasets import mnist
 from dotenv import load_dotenv
+from datetime import datetime
 
 # Load environment variables
-load_dotenv(dotenv_path=r"C:\Users\Jessica J. Ugowe\Documents\HERBST 2024\Data Toolkits and Architecture\DataScienceToolkits_project\DataScienceToolkits\python_service\milestone_3.env")  # Ensure this matches your env file's name
+load_dotenv(dotenv_path='milestone_env')  # Ensure this matches your env file's name
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -46,6 +47,17 @@ def initialize_db(conn):
     try:
         logging.info("Starting database initialization...")
         cursor = conn.cursor()
+        
+        # First check if tables exist
+        cursor.execute("""
+            SELECT table_name 
+            FROM information_schema.tables 
+            WHERE table_schema = 'public'
+            AND table_name IN ('input_data', 'predictions');
+        """)
+        existing_tables = cursor.fetchall()
+        logging.info(f"Existing tables found: {existing_tables}")
+
         logging.info("Executing CREATE TABLE for input_data...")
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS input_data (
@@ -53,6 +65,7 @@ def initialize_db(conn):
                 image BYTEA NOT NULL
             );
         """)
+        
         logging.info("Executing CREATE TABLE for predictions...")
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS predictions (
@@ -61,15 +74,27 @@ def initialize_db(conn):
                 prediction INTEGER NOT NULL
             );
         """)
+        
+        # Verify tables were created
+        cursor.execute("""
+            SELECT table_name 
+            FROM information_schema.tables 
+            WHERE table_schema = 'public'
+            AND table_name IN ('input_data', 'predictions');
+        """)
+        tables_after_creation = cursor.fetchall()
+        logging.info(f"Tables after creation: {tables_after_creation}")
+        
         conn.commit()
         logging.info("Tables created successfully.")
-    except Exception as e:
-        logging.error(f"Error initializing database: {e}")
-        conn.rollback()
-    finally:
-        logging.info("Closing database cursor.")
-        cursor.close()
 
+    except Exception as e:
+        logging.error(f"Error initializing database: {str(e)}")
+        logging.error(f"Error type: {type(e)}")
+        conn.rollback()
+        raise  # Re-raise the exception to see the full error
+    finally:
+        cursor.close()
 
 # Function to insert an image into the database
 def insert_input_data(conn, image_array):
@@ -116,6 +141,12 @@ def predict_image(model, conn, input_id):
 
 # Main script
 def main():
+
+    # Initial delay to allow time for log inspection
+    logging.info(f"Application startup delayed for 1 minute... Start time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    time.sleep(120)  # 2-minute delay
+    logging.info(f"Application execution begins at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
     conn = None
     while not conn:
         conn = connect_db()
@@ -138,9 +169,9 @@ def main():
     # Insert image and predict
     input_id = insert_input_data(conn, sample_image)
 
-    # ADD A ONE-MINUTE TIMEOUT HERE
-    logging.info("Pausing for 1 minute before moving to model predictions...")
-    time.sleep(60)  # Pause for 60 seconds
+    # Add a 2 minutes times out.
+    logging.info("Pausing for 2 minutes before moving to model predictions...")
+    time.sleep(120)  # Pause for 120 seconds
 
     if input_id:
         predict_image(model, conn, input_id)
