@@ -186,3 +186,4 @@ wrapt==1.16.0
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
+sqlalchemy
