@@ -163,11 +163,9 @@ The goal of this milestone is to introduce a relational database that can store 
 
 2. **Clone the repository and open the respective directory in Visual Studio as stated in the Milestones above.**
 
-3. **To fetch and visualize samples from the database**
+3. **Fetch and visualize samples from the database**
 
-    Start the PostgreSQL Database
-
-    `docker run --name ms3-postgres -e POSTGRES_PASSWORD=your_password -p 5437:5432 -d postgres`
+    Start the PostgreSQL Database `docker run --name ms3-postgres -e POSTGRES_PASSWORD=your_password -p 5437:5432 -d postgres`
 
     Create a file named **ms3_mnist.env** in the root directory and add it to .gitignore, it should look like the description below
 
@@ -178,13 +176,11 @@ The goal of this milestone is to introduce a relational database that can store 
         DB_NAME=ms3_mnist
         your_password=your_password
 
-    *Note that the everything after the **=** in ms3_mnist.env should be assigned something, so **your_password and DB_PASSWORD** should be assigned the same thing after the **=*** 
+    *Note that the everything after the **=** in ms3_mnist.env should be assigned something, so **your_password and DB_PASSWORD** should be assigned the same thing after the **=** sign* 
 
     Change directory `cd src`
 
-    Next run the Python Script
-
-    `python ms3_mnist_task3.py`
+    Run the Python Script `python ms3_mnist_task3.py`
 
     *If you successfully carried out the steps, you should now be able to see the image of a number on your machine. Congrats!*
 
@@ -196,9 +192,9 @@ The goal of this milestone is to introduce a relational database that can store 
 
     `docker ps -a`
 
-4. **To run the Multi Docker Container Application which is the basis of the "Backend" of our Web Application**
+4. **Run Multi Docker Container Application**
 
-    First create a file named **milestone_3.env** in the python_service directory and add it to .gitignore, it should look like the description below
+    Create a file named **milestone_3.env** in the python_service directory and add it to .gitignore, it should look like the description below
 
         DB_HOST=postgres
         DB_PORT=5432
@@ -208,13 +204,9 @@ The goal of this milestone is to introduce a relational database that can store 
 
     Change directory using `cd python_service`
     
-    Now, run
+    Run `docker-compose up`
 
-    `docker-compose up`
-
-     *Kindly note that a successful run is one whose container logs exit with **code 0**, if this is your case, Congratulations once again.*
-
-    After the successful run, use PGADMIN to check whether there is a database in PostgreSQL called "milestone_3" and it contains two tables namely "input_data" and "predictions". Did you see the tables?
+     *Kindly note that a successful run is one whose container logs exit with **code 0**, if this is your case, Congratulations once again. After the successful run, use PGADMIN to check whether there is a database in PostgreSQL called "milestone_3" and it contains two tables namely "input_data" and "predictions". Did you see the tables?*
 
 
 ## Contributions
