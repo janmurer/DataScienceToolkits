@@ -16,11 +16,6 @@ The repository is organized as follows:
 │   └── trainer.py
 |── model/
 │   └── model.keras
-|── python_service/
-│   ├── app.py
-│   ├── docker-compose.yml
-│   ├── Dockerfile
-│   └── milestone_3.env
 ├── reports/
 │   ├── report_1.md
 |   ├── report_2.md
@@ -31,10 +26,12 @@ The repository is organized as follows:
 |   └── train_model.py
 ├── .dockerignore
 ├── .gitignore
+|── 2.Dockerfile
+|── app.py
+|── docker-compose.yml
 ├── Dockerfile
-├── README.md
 ├── main.py
-├── ms3_mnist.env
+├── README.md
 └── requirements.txt
 ```
     
@@ -184,43 +181,15 @@ The goal of this milestone is to introduce a relational database that can store 
 
     *If you successfully carried out the steps, you should now be able to see the image of a number on your machine. Congrats!*
 
-    After the successful completion above, stop, remove the Container and verify no conflicting Containers are running using:
-     
-    `docker stop ms3-postgres`
-
-    `docker rm ms3-postgres`
-
-    `docker ps -a`
-
 4. **Run Multi Docker Container Application**
-
-    Create a file named **milestone_3.env** in the python_service directory and add it to .gitignore, it should look like the description below
-
-        DB_HOST=postgres
-        DB_PORT=5432
-        DB_USER=postgres
-        DB_PASSWORD=your_password
-        DB_NAME=milestone_3
-
-    Change directory using `cd python_service`
     
     Run `docker-compose up`
 
-     *Kindly note that a successful run is one whose container logs exit with **code 0**, if this is your case, Congratulations once again. After the successful run, use PGADMIN to check whether there is a database in PostgreSQL called "milestone_3" and it contains two tables namely "input_data" and "predictions". Did you see the tables?*
+     *Kindly note that a successful run is one whose container logs exit with **code 0**. After the successful run, use PGADMIN to check whether there is a database in PostgreSQL called "milestone_3" and it contains two tables namely "input_data" and "predictions".*
 
 
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
-
-
-
-
-
-
-
-
-
-
 
 
 
