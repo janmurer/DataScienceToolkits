@@ -53,45 +53,76 @@ A confusion matrix is a summary table used to evaluate the performance of a clas
 | **Actual Positive** | True Positive (TP)   | False Negative (FN)  |
 | **Actual Negative** | False Positive (FP)  | True Negative (TN)   |
 
+---
+
 ## Task 2: 
 
 **Choose an appropriate metric for optimizing your ML Model. What is the reasoning behind it?**
 
 The MNIST dataset is balanced, all classes are equally represented in the data. Therefore, the chosen metric for optimization is Accuracy. Accuracy offers a great interpretability and is a rather straightforward metric. Lastly accuracy is a standard metric in benchmarks for MNIST and allows for seamingless comparison among different models and architectures. 
 
-Instrument your code with Weights & Biases (within a Docker container). Choose an appropriate metric for optimizing your ML Model. What is the reasoning behind it?
-Note you can make a new Dockerfile (you don’t need to use docker-compose)
-Your code should:
-- Login to W&B (Tip: you can use ENTRYPOINT in a Dockerfile to run a shell script that logs you in (see below))
-- Train a Model
-- Save and upload the trained model
-- Log the value of the loss function (graphically)
-- Log your metric (graphically), Tip use a Keras Metric
-- (Optional) Log your current Git commit, also try to enforce that you have to first commit all changes before W&B allows you to sync with the cloud otherwise you might log the wrong commit hash (and others do not use the same code as you do when they want to reproduce the experiment by checking out the commit hash). You can create a shell script for that (get Git commit hash and save as Environment Variable, use Python code to retrieve the variable and save it in W&B)
-- (Optional) Upload the output of the predict function as a file to W&B
-- Try to play with your Neural Network, by changing parameters or even its architecture. Make sure that you log those changes automatically to W&B. Compare the runs on W&B, how do the metrics/loss change? It is not necessary to “optimize” your model. Possible changes to the training:
-- Architecture (add a Layer, delete a Layer, change hidden units) - Different loss function
-- Different optimizer
-- Batch size, Learning rate, ...
-Please read carefully (W&B Login):
-- After creating an account at W&B you will get a W&B “Token”. This token has to remain secret, it acts like a password. So do not commit/push the token in/top Git/GitHub, or others may gain access and change your W&B Account. If you uploaded the token by mistake, then change it in the W&B settings immediately. Since your Git repos are public, these keys will be stolen by web scrapers in very little time.
-Note: Secret sharing among collaborators is a big topic in itself. There is a plugin called “git secrets” that allows sharing secrets via Git/GitHub by always first encrypting the secrets before they are pushed to a Git Repository. Collaborators are part of a “key chain” and can decrypt the secret on their machines locally. If you are interested in this, you can try setting up “git secrets”. GitHub also allows you to store secrets for specific repositories. You can also look into that.
-- In order to do the login properly. You should save this token in a file that you will put into your .gitignore. (I usually call this file .env)
-- The script that Docker runs in its entrypoint can access this .env file and save the token as an Environment Variable.
-- Your entrypoint script (might be called docker_entrypoint.sh) may look like this:
-This shell script is executed as an entrypoint when the docker image is run with “docker run ..”. Whatever is in CMD (or the command that is run by f.e. “docker run <image> <command>) will be executed by ‘exec “$@”’, after wandb login was run. $WANDB_TOKEN is a reference to the environment variable. So inside the .env file you should have a WANDB_TOKEN=<your_secret_token_which_you_should_never_share_or_upload_to_github_ever> (without the $ sign).
-When you run the docker container, you can add the –-env_file argument: “docker run –-env_file=.env <image> python3 main.py”
-Docker will load whatever Environment Variables are defined in “.env” (in our case WANDB_TOKEN). The entrypoint script above is executed and $WANDB_TOKEN reads the Environment Variable WANDB_TOKEN that contains your secret token. “wandb login” logs you into the WANDB Cloud Service (first you need to install the wandb Python client through the requirements file).
-Again: Do not version control .env, otherwise you leak your secret token to the world. In case this happens, change the token immediately in the W&B settings on their Web page (after you logged in on the Web page with username/password).
+**Setps taken**
+
+In Task 2, we implemented the following key components:
+
+1. Docker Setup:
+
+-   Created a Dockerfile to containerize our ML training environment
+-   Set up a docker_entrypoint.sh script to handle W&B login
+-   Used environment variables (.env file) to securely manage the W&B token
+
+2. Machine Learning with W&B Integration:
+
+-   Created main_wandb.py that:
+
+    -   Loads MNIST data
+    -   Builds and trains a CNN model
+    -   Tracks training metrics using W&B
+    -   Uses accuracy as the chosen metric
+    -   Saves the trained model
+
+3.  W&B Integration:
+
+    -   Set up logging for:
+    -   Model architecture
+    -   Training metrics (accuracy, loss)
+    -   Model artifacts
+
+---
  
-## Task 3
-Use Jupyter Notebook to analyze your data.
-- Load your data into a Numpy Array (f.e. If you have Image data, load an image and you should get an array with dimensions (width, height, channels), where channels is 3 in an RGB image (Red,Green and Blue colors).
-- Use Numpy to analyze your data. F.e. you could create a histogram of the color channels, or the distribution of words in your training set (in case you have text data). Use Matplotlib to plot figures.
-- Analyze the output of your Training runs from Task 2. This means:
-download the ground truth of your data set and the predictions your Neural Network made. You may try to create a Confusion Matrix with Scikit-Learn.
-Deliverables:
-- We want to see your training runs in Task 2. So make your W&B Projects public and add the links to your reports
-- Also, version control your Jupyter Notebooks from Task 3. Use Markdown within the Jupyter Notebooks to tell us what you were attempting to do.
-Bonus points from now on:
-Add the link to the issue to your report if you want to claim Bonus points (as a helper).
+## Task 3:
+
+**Steps Taken**
+
+-   Data Loading and Reshaping:
+    -   Imported necessary libraries 
+    -   Loaded MNIST data using mnist.load_data()
+    -   Reshaped data to include channel dimension (60000, 28, 28, 1)
+
+-   Data Analysis through Visualizations:
+    -   Displayed a sample digit to see what the data looks like visually
+    -   Created an average intensity heatmap showing where digits are typically written
+    -   Generated histogram of all pixel values showing the distribution across the dataset
+    -   Created a bar chart showing the distribution of digits (0-9)
+
+### The main insight from our analysis is that:
+
+-   MNIST images are mostly binary (black and white)
+-   Digits are typically centered in the images
+-   The dataset has a specific structure: grayscale images with one channel, sized 28x28 pixels
+-   The mean of 33.318 and standard deviation of 78.567 tell us important things about the MNIST dataset:
+
+    -   Mean = 33.318:
+
+        -   This relatively low mean (considering pixel values range from 0-255) indicates that most pixels in the dataset are dark and This makes sense because each image is mostly black background, with only a small portion containing the white digit. If the images were equally black and white, we would expect a mean closer to 127.5 (halfway between 0 and 255)
+
+    -   Standard Deviation = 78.567:
+
+        -   The high standard deviation indicates a strong spread/variation in pixel values.
+        -   The large spread confirms the binary nature of MNIST images - pixels tend to be either very dark (0, background) or very bright (255, digit) and rather than having lots of gray values in the middle, we have this big jump from black to white, causing the high standard deviation
+
+Together, these statistics support what we saw in our visualizations - MNIST images consist of mostly black backgrounds (leading to low mean) with stark white digits (causing high standard deviation due to the sharp contrast).
+
+### Challenge
+
+ A major challenge for 
