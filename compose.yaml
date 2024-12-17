@@ -8,12 +8,8 @@ services:
     environment:
       - PYTHONPATH=/app
     volumes:
-      - models_volume:/app/models  
-    healthcheck:
-      test: ["CMD-SHELL", "[ -f /app/models/mnist_model.keras ] || exit 1"]
-      interval: 5s
-      retries: 5
-      timeout: 5s
+      - models_volume:/app/models 
+    
 
   db:
     image: postgres:latest
@@ -25,21 +21,19 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    healthcheck:
+    healthcheck:  # Add a healthcheck for Postgres
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
+
 
   db_app:
     build:
       context: .
       dockerfile: database/Dockerfile
     depends_on:
-      app:
-        condition: service_healthy 
-      db:
-        condition: service_healthy 
+      - db
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/milestone_3
     volumes:

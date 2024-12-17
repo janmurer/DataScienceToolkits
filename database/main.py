@@ -32,8 +32,7 @@ def main():
     x_data, y_data, ids = transform_data_to_numpy(fetched_data)
 
     print("Loading the trained model...")
-    loaded_model = load_trained_model(filepath='models/mnist_model.keras')
-    #loaded_model = load_trained_model(filepath = "/app/models/mnist_model.keras")
+    loaded_model = load_trained_model(filepath = "/app/models/mnist_model.keras")
 
     print("Predciting the values...")
     predicted_labels = predict(loaded_model, x_data)
