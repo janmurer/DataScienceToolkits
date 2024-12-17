@@ -125,4 +125,4 @@ Together, these statistics support what we saw in our visualizations - MNIST ima
 
 ### Challenge
 
- A major challenge for 
+ A major challenge was not been able to make the work public because we had to pay to make it public and for this reason we are not able to include the link of what we carried out in task 2 and that is why we were not able to also carry out the analysis in task 3.
