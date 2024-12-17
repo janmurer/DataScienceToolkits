@@ -2,10 +2,16 @@
 
 from app import setup_database, load_data, prepare_mnist_data, input_mnist_data, ensure_integer_labels, load_data_from_db, transform_data_to_numpy, load_trained_model, predict, save_predictions_to_db
 
+database = "milestone_3"
+user = "postgres"
+password = "postgres"
+port = 5432
+host = "db"
+
 def main():
 
     print("Creating databases..")
-    setup_database(database = "milestone_3", user = "postgres", password = "postgres", port = 5432, host = "db")
+    setup_database(database = database, user = user, password = password, port = port, host = host)
     print("Database created")
 
     print("Starting data loading...")
@@ -17,11 +23,11 @@ def main():
     prepared_data = prepare_mnist_data(x_test, y_test)
 
     print("Inserting data into the database")
-    input_mnist_data(database = "milestone_3", user = "postgres", password = "postgres", port = 5432, host = "db", mnist_data = prepared_data)
+    input_mnist_data(database = database, user = user, password = password, port = port, host = host, mnist_data = prepared_data)
     print("Data insertion successfully completed")
 
     print("Fetch data from database...")
-    fetched_data = load_data_from_db(database = "milestone_3", user = "postgres", password = "postgres", port = 5432, host = "db")
+    fetched_data = load_data_from_db(database = database, user = user, password = password, port = port, host = host)
     x_data, y_data, ids = transform_data_to_numpy(fetched_data)
 
     print("x_data shape:", x_data.shape)  # Expected: (N, 28, 28, 1)
@@ -38,7 +44,7 @@ def main():
     print("True value:")
 
     print("Saving results to database")
-    save_predictions_to_db(database = "milestone_3", user = "postgres", password = "postgres", port = 5432, host = "db", predictions = predicted_labels, input_data_ids = ids)
+    save_predictions_to_db(database = database, user = user, password = password, port = port, host = host, predictions = predicted_labels, input_data_ids = ids)
     print("Results saved to the database")
 
 
