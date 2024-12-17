@@ -1,51 +1,32 @@
+# app/data_loader.py
 import psycopg2
+from PIL import Image
+from io import BytesIO
+import numpy as np
 
 def input_mnist_data(database, user, host, password, port, mnist_data):
     """
-    Inserts the prepared MNIST data into the input_data table.
+    Inserts MNIST data into the input_data table.
 
     Parameters:
-        database (str): Name of the database.
-        user (str): Database user name.
-        host (str): Host address.
-        password (str): Password for the database.
-        port (int): Port number of the database.
-        mnist_data (list of tuples): Prepared data [(image_binary, correct_value), ...].
-
-    Returns:
-        None
+        mnist_data (list of tuples): Prepared data [(image_binary, label), ...].
     """
     try:
-        # Open connection to PostgreSQL database
-        conn = psycopg2.connect(
-            database=database,
-            user=user,
-            host=host,
-            password=password,
-            port=port
-        )
+        conn = psycopg2.connect(database=database, user=user, host=host, password=password, port=port)
         cur = conn.cursor()
-        
-        # Insert MNIST data into the input_data table
-        insert_query = """
-            INSERT INTO input_data (image, true_value) 
-            VALUES (%s, %s);
-        """
-        cur.executemany(insert_query, mnist_data)  # Bulk insert
-        
-        # Commit changes
+        cur.execute("DELETE FROM input_data;")  # Optional: Clear table
+        cur.executemany("INSERT INTO input_data (image, true_value) VALUES (%s, %s);", mnist_data)
         conn.commit()
         print("Data successfully inserted into the database.")
-    
     except Exception as e:
-        print(f"An error occurred: {e}")
-    
+        print(f"Error during data insertion: {e}")
     finally:
-        # Close cursor and connection
         if cur:
             cur.close()
         if conn:
             conn.close()
+
+
 
 def save_predictions_to_db(database, user, password, port, host, predictions, input_data_ids):
     """

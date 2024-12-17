@@ -1,6 +1,6 @@
 # main.py
 
-from app import setup_database, load_data, prepare_mnist_data, input_mnist_data, ensure_integer_labels, load_data_from_db, transform_data_to_numpy, load_trained_model, predict, save_predictions_to_db
+from app import setup_database, load_data, prepare_mnist_data, input_mnist_data, ensure_integer_labels, load_data_from_db, transform_data_to_numpy, load_trained_model, predict, save_predictions_to_db, test_serialization_deserialization
 
 database = "milestone_3"
 user = "postgres"
@@ -21,6 +21,7 @@ def main():
     print("Prepare data...")
     y_test = ensure_integer_labels(y_test)
     prepared_data = prepare_mnist_data(x_test, y_test)
+    print("Converted integer label for first image:", y_test[0])
 
     print("Inserting data into the database")
     input_mnist_data(database = database, user = user, password = password, port = port, host = host, mnist_data = prepared_data)
@@ -30,18 +31,14 @@ def main():
     fetched_data = load_data_from_db(database = database, user = user, password = password, port = port, host = host)
     x_data, y_data, ids = transform_data_to_numpy(fetched_data)
 
-    print("x_data shape:", x_data.shape)  # Expected: (N, 28, 28, 1)
-    print("y_data shape:", y_data.shape)  # Expected: (N, 10)
-    print("First label (one-hot):", y_data[0])
-
     print("Loading the trained model...")
     loaded_model = load_trained_model(filepath='models/mnist_model.keras')
 
     print("Predciting the values...")
     predicted_labels = predict(loaded_model, x_data)
     print("Prediction successful!")
-    print("Prediction of first value:")
-    print("True value:")
+    #y_data_converted = convert_to_true_labels(y_data)
+    print("Prediction of first value:", predicted_labels[0], "(true value:", y_data[0], ")")
 
     print("Saving results to database")
     save_predictions_to_db(database = database, user = user, password = password, port = port, host = host, predictions = predicted_labels, input_data_ids = ids)
