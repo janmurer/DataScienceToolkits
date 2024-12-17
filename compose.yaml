@@ -1,0 +1,80 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - models_volume:/app/models 
+    
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: milestone_3
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:  # Add a healthcheck for Postgres
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  db_app:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/milestone_3
+    volumes:
+      - models_volume:/app/models  
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    depends_on: 
+      db:
+        condition: service_healthy
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin-servers.json:/pgadmin4/servers.json
+
+  # jokes:
+  #   build:
+  #     context: .
+  #     dockerfile: jokes/Dockerfile
+  #   ports:
+  #     - "8001:8000" 
+  #   environment:
+  #     - PYTHONPATH=/jokes
+
+  # db_jokes:
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: ms3_jokes
+  #   ports:
+  #     - "5433:5432"
+  #   restart: always
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  models_volume: 
