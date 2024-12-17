@@ -3,7 +3,7 @@ import psycopg2
 database = "ms3_jokes"
 user = "postgres"
 password = "postgres"
-port = 5432
+port = 5433
 host = "localhost"
 
 # Function for the Creation of the database
