@@ -10,4 +10,3 @@ from .database_creation import setup_database
 from .database_insert import input_mnist_data, save_predictions_to_db
 from .database_mnist_preparation import prepare_mnist_data, ensure_integer_labels
 from .one_hot_decoder import convert_to_true_labels
-from .serializationtest import test_serialization_deserialization
