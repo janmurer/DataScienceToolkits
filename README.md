@@ -11,31 +11,51 @@ The repository is organized as follows:
 ├── app/
 │   ├── __init__.py
 │   ├── data_loader.py
+│   ├── database_creation.py
+│   ├── database_insert.py
+│   ├── jokes_functions.py
 │   ├── model.py
+│   ├── one_hot_decoder.py
 │   ├── predictor.py
 │   └── trainer.py
-|── model/
+│
+├── database/
+│   ├── Dockerfile
+│   └── main.py
+│
+├── jokes/
+│   ├── Dockerfile
+│   └── main.py
+│
+├── model/
 │   └── model.keras
+│
 ├── reports/
 │   ├── report_1.md
-|   ├── report_2.md
+│   ├── report_2.md
 │   └── report_3.md
+│
 ├── src/
 │   ├── mnist_covnet.py
-|   ├── ms3_mnist_task3.py
-|   └── train_model.py
+│   ├── ms3_mnist_task3.py
+│   └── train_model.py
+│
 ├── .dockerignore
 ├── .gitignore
-|── 2.Dockerfile
-|── app.py
-|── docker-compose.yml
+├── compose.yaml
+├── docker-compose.yml
 ├── Dockerfile
 ├── main.py
+├── pgadmin-servers.json
 ├── README.md
-└── requirements.txt
+├── requirements.in
+├── requirements.txt
+└── wait_for_model.sh
 ```
     
 * app/: Contains all modules for our application to work
+* database/: Contains a docker file and a scrpit that handles the database operations. (Though it accesses functions from app/)
+* jokes/: Contains a dockerfile and a scrpit that handles the jokes database of task 2. Itz is not executed by default and has to be manually accessed by removing uncommenting the relevant chunks in the docker-compose file.
 * reports/: Contains markdown files documenting the process of our work on milestones and logs findings and challenges we faced completing the milestones
 * src/: Contains the foundational code for our application(mnist_covnet.py) and other scripts
 * requirements.txt: List of packages and dependencies to run the application
@@ -160,32 +180,13 @@ The goal of this milestone is to introduce a relational database that can store 
 
 2. **Clone the repository and open the respective directory in Visual Studio as stated in the Milestones above.**
 
-3. **Fetch and visualize samples from the database**
-
-    Start the PostgreSQL Database `docker run --name ms3-postgres -e POSTGRES_PASSWORD=your_password -p 5437:5432 -d postgres`
-
-    Create a file named **ms3_mnist.env** in the root directory and add it to .gitignore, it should look like the description below
-
-        DB_HOST=localhost
-        DB_PORT=5437
-        DB_USER=postgres
-        DB_PASSWORD=your_password
-        DB_NAME=ms3_mnist
-        your_password=your_password
-
-    *Note that the everything after the **=** in ms3_mnist.env should be assigned something, so **your_password and DB_PASSWORD** should be assigned the same thing after the **=** sign* 
-
-    Change directory `cd src`
-
-    Run the Python Script `python ms3_mnist_task3.py`
-
-    *If you successfully carried out the steps, you should now be able to see the image of a number on your machine. Congrats!*
-
-4. **Run Multi Docker Container Application**
+3. **Run Multi Docker Container Application**
     
     Run `docker-compose up`
 
-     *Kindly note that a successful run is one whose container logs exit with **code 0**. After the successful run, use PGADMIN to check whether there is a database in PostgreSQL called "milestone_3" and it contains two tables namely "input_data" and "predictions".*
+4. **Check the tables using PgAdmin**
+
+    If you would like to access the tables, you can access your localhost on port 5050 via your browser. This should redirect you to the login page. Here you can enter username 'admin@admin.com' and password 'admin'. This will the open the connection and you will be prompted to enter the database password, which is 'postgres'. Now you can use the interface to access the database.
 
 
 ## Contributions
