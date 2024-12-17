@@ -8,26 +8,12 @@ services:
     environment:
       - PYTHONPATH=/app
     volumes:
-      - ./models:/app/models
-     
-  # jokes:
-  #   build:
-  #     context: .
-  #     dockerfile: jokes/Dockerfile
-  #   ports:
-  #     - "8001:8000" 
-  #   environment:
-  #     - PYTHONPATH=/jokes
-
-  # db_jokes:
-  #   image: postgres:latest
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: ms3_jokes
-  #   ports:
-  #     - "5433:5432"
-  #   restart: always
+      - models_volume:/app/models  
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /app/models/mnist_model.keras ] || exit 1"]
+      interval: 5s
+      retries: 5
+      timeout: 5s
 
   db:
     image: postgres:latest
@@ -50,23 +36,51 @@ services:
       context: .
       dockerfile: database/Dockerfile
     depends_on:
-    - app
-    - db
+      app:
+        condition: service_healthy 
+      db:
+        condition: service_healthy 
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/milestone_3
     volumes:
-      - ./models:/app/models
+      - models_volume:/app/models  
 
   pgadmin:
     image: dpage/pgadmin4
     restart: always
     depends_on: 
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "5050:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin-servers.json:/pgadmin4/servers.json
+
+  # jokes:
+  #   build:
+  #     context: .
+  #     dockerfile: jokes/Dockerfile
+  #   ports:
+  #     - "8001:8000" 
+  #   environment:
+  #     - PYTHONPATH=/jokes
+
+  # db_jokes:
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: ms3_jokes
+  #   ports:
+  #     - "5433:5432"
+  #   restart: always
 
 volumes:
-  postgres_data: 
+  postgres_data:
+  pgadmin_data:
+  models_volume: 
