@@ -21,11 +21,9 @@ def main():
     print("Prepare data...")
     y_test = ensure_integer_labels(y_test)
     prepared_data = prepare_mnist_data(x_test, y_test)
-    print("Converted integer label for first image:", y_test[0])
 
-    print("Inserting data into the database")
+    print("Inserting data into the database...")
     input_mnist_data(database = database, user = user, password = password, port = port, host = host, mnist_data = prepared_data)
-    print("Data insertion successfully completed")
 
     print("Fetch data from database...")
     fetched_data = load_data_from_db(database = database, user = user, password = password, port = port, host = host)
