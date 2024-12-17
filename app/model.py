@@ -26,4 +26,12 @@ def save_model(model, filepath="models/mnist_model.keras"):
     print(f"Model saved to '{filepath}'.")
 
 def load_trained_model(filepath="models/mnist_model.keras"):
-    return load_model(filepath)
+    
+    try:
+        # Load the saved model from the mounted volume
+        model = load_model('models/mnist_model.keras')
+        print("Model loaded successfully!")
+        return model
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        return None

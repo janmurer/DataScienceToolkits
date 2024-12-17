@@ -11,25 +11,53 @@ The repository is organized as follows:
 ├── app/
 │   ├── __init__.py
 │   ├── data_loader.py
+│   ├── database_creation.py
+│   ├── database_insert.py
+│   ├── jokes_functions.py
 │   ├── model.py
+│   ├── one_hot_decoder.py
 │   ├── predictor.py
 │   └── trainer.py
+│
+├── database/
+│   ├── Dockerfile
+│   └── main.py
+│
+├── jokes/
+│   ├── Dockerfile
+│   └── main.py
+│
+├── model/
+│   └── model.keras
+│
 ├── reports/
 │   ├── report_1.md
-│   └── report_2.md
+│   ├── report_2.md
+│   └── report_3.md
+│
 ├── src/
-│   └── mnist_covnet.py
+│   ├── mnist_covnet.py
+│   ├── ms3_mnist_task3.py
+│   └── train_model.py
+│
 ├── .dockerignore
 ├── .gitignore
+├── compose.yaml
+├── docker-compose.yml
 ├── Dockerfile
-├── README.md
 ├── main.py
-└── requirements.txt
+├── pgadmin-servers.json
+├── README.md
+├── requirements.in
+├── requirements.txt
+└── wait_for_model.sh
 ```
     
 * app/: Contains all modules for our application to work
+* database/: Contains a docker file and a scrpit that handles the database operations. (Though it accesses functions from app/)
+* jokes/: Contains a dockerfile and a scrpit that handles the jokes database of task 2. Itz is not executed by default and has to be manually accessed by removing uncommenting the relevant chunks in the docker-compose file.
 * reports/: Contains markdown files documenting the process of our work on milestones and logs findings and challenges we faced completing the milestones
-* src/: Contains the foundational code for our application
+* src/: Contains the foundational code for our application(mnist_covnet.py) and other scripts
 * requirements.txt: List of packages and dependencies to run the application
 
 ## Getting Started
@@ -79,7 +107,7 @@ The goal of milestone_1 is to checkout code (https://github.com/keras-team/keras
 
     `git clone https://github.com/janmurer/DataScienceToolkits.git`
 
-5. **Open the respective directory in Virtual Studio** 
+5. **Open the respective directory in Visual Studio** 
 
     This is the directory or folder where you cloned the repository into in File explorer. 
  
@@ -120,7 +148,7 @@ Assuming you completed all setup-steps from Milestone 1:
 
     `git clone https://github.com/janmurer/DataScienceToolkits.git`
 
-3. **Open the respective directory in Virtual Studio** 
+3. **Open the respective directory in Visual Studio** 
 
     This is the directory or folder where you cloned the repository into in File explorer. 
  
@@ -132,5 +160,52 @@ Assuming you completed all setup-steps from Milestone 1:
 
     `docker run mnist_app`
 
+
+## Milestone 3
+
+### Overview
+
+The goal of this milestone is to introduce a relational database that can store the input and output of our Neural Network. The database should be connected to our main python application through a Docker Network, which allows us to interact with it through it's host name (IP Address) and port.
+
+### Setup
+
+
+1. **Install Docker Compose**
+
+    If not installed kindly use the link below:
+
+    https://docs.docker.com/compose/gettingstarted/
+
+    However, if you are using Docker Desktop, and have completed all setups from the other Milestones above, kindly skip this step.
+
+2. **Clone the repository and open the respective directory in Visual Studio as stated in the Milestones above.**
+
+3. **Run Multi Docker Container Application**
+    
+    Run `docker-compose up`
+
+4. **Check the tables using PgAdmin**
+
+    If you would like to access the tables, you can access your localhost on port 5050 via your browser. This should redirect you to the login page. Here you can enter username 'admin@admin.com' and password 'admin'. This will the open the connection and you will be prompted to enter the database password, which is 'postgres'. Now you can use the interface to access the database.
+
+
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
