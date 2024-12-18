@@ -226,6 +226,64 @@ Assuming you completed all setup-steps from Milestone 1-3:
 6. **See and track the performance of your model on wandb.ai**
 >>>>>>> c82538e (update report_4.md, update README.md)
 
+## Milestone 4
+
+### Overview
+
+In this milestone we should create a wandb-account to essentially log and visualize the performance of our MNIST-model. 
+
+### Setup
+
+Assuming you completed all setup-steps from Milestone 1-3:
+
+
+1. **Clone the repository using**
+
+    `git clone https://github.com/janmurer/DataScienceToolkits.git`
+
+2. **Open the respective directory in Virtual Studio** 
+
+    This is the directory or folder where you cloned the repository into in File explorer. 
+
+3. **Store your wandb key in an .env file at the root of your directory**
+
+    `WANDB_TOKEN=YourActualWANDBAPIKey`
+
+    Make sure to never share/publish your token. Otherwhise bad things will happen. 
+
+4. **Build the docker image** 
+    
+    `docker build -f wandb/Dockerfile -t wandb_mnist .`
+
+5. **Change the directory to the root folder of this project**
+
+6. **Run the docker image in interactive mode with the .env variable**
+
+    `docker run -it --env-file .env wandb_mnist /bin/bash`
+
+7. **Once in interactive mode, install the text editor nano**
+
+    `apt-get update && apt-get install -y nano`
+
+8. **Open the corresponding script for hyperparameter tuning**
+    
+    `nano /wandb/main_wandb.py`.
+
+9. **Modify hyperparameter as desired**
+
+10. **Save the changes and exit the file (Ctrl + O, Enter, Ctrl - X)**
+
+11. **Run the script**
+
+    `python /wandb/main_wandb.py`
+    
+12. **Modify hyperparameter as often as desired**
+
+13. **Log into your wandb.ai account and see how your models compared**
+
+14. **See and track the performance of your model on wandb.ai**
+
+
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
 
