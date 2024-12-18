@@ -61,7 +61,7 @@ A confusion matrix is a summary table used to evaluate the performance of a clas
 
 The MNIST dataset is balanced, all classes are equally represented in the data. Therefore, the chosen metric for optimization is Accuracy. Accuracy offers a great interpretability and is a rather straightforward metric. Lastly accuracy is a standard metric in benchmarks for MNIST and allows for seamingless comparison among different models and architectures. 
 
-**Setps taken**
+**Steps taken**
 
 In Task 2, we implemented the following key components:
 
@@ -88,7 +88,25 @@ In Task 2, we implemented the following key components:
     -   Training metrics (accuracy, loss)
     -   Model artifacts
 
----
+4. Run different testruns with different parameters:
+
+    -   Build the docker image using the command `docker build -f wandb/Dockerfile -t wandb_mnist .`.
+    -   Change the directory to the root folder of this project.
+    -   Run the docker image in interactive mode with the .env variable using the command `docker run -it --env-file .env wandb_mnist /bin/bash`.
+    -   Once in interactive mode, install the text editor nano: `apt-get update && apt-get install -y nano`.
+    -   Open the corresponding script for hyperparameter tuning using the command: `nano /wandb/main_wandb.py`.
+    -   Modify hyperparameter as desired.
+    -   Save the changes and exit the file (Ctrl + O, Enter, Ctrl - X).
+    -   Run the script using the command: `python /wandb/main_wandb.py`.
+    -   Modify hyperparameter as desired.
+    -   Log into your wandb.ai account and see how your models compared.
+
+We were not able to make our workspace public, thats why we attached a screenshot of our wandb.ai workspace and our corresponding testruns.
+
+
+![WandB Workspace](img/wandb_workspace.png "WandB Workspace Screenshot")
+
+
  
 ## Task 3:
 
@@ -125,4 +143,4 @@ Together, these statistics support what we saw in our visualizations - MNIST ima
 
 ### Challenge
 
- A major challenge was not been able to make the work public because we had to pay to make it public and for this reason we are not able to include the link of what we carried out in task 2 and that is why we were not able to also carry out the analysis in task 3.
+ We believe that making a wandb.ai workplaces public is an option for payed users only. For this reason we are not able to include the link of what we carried out in task 2 (however there is a screenshot of our workplace attached to this report). Also were we not able to download the ground truth of our data to perform further data analysis and comparison between different test runs.
