@@ -187,16 +187,38 @@ Assuming you completed all setup-steps from Milestone 1-3:
 
     Make sure to never share/publish your token. Otherwhise bad things will happen. 
 
-4. **Build the Docker image**
+4. **Build the docker image** 
     
-    `docker build -f wandb/Dockerfile -t mnist_wandb .`
+    `docker build -f wandb/Dockerfile -t wandb_mnist .`
 
-5. **Run the Docker container**
+5. **Change the directory to the root folder of this project**
 
-    `docker run --env-file .env mnist_wandb`
+6. **Run the docker image in interactive mode with the .env variable**
 
-6. **See and track the performance of your model on wandb.ai**
-=======
+    `docker run -it --env-file .env wandb_mnist /bin/bash`
+
+7. **Once in interactive mode, install the text editor nano**
+
+    `apt-get update && apt-get install -y nano`
+
+8. **Open the corresponding script for hyperparameter tuning**
+    
+    `nano /wandb/main_wandb.py`.
+
+9. **Modify hyperparameter as desired**
+
+10. **Save the changes and exit the file (Ctrl + O, Enter, Ctrl - X)**
+
+11. **Run the script**
+
+    `python /wandb/main_wandb.py`
+    
+12. **Modify hyperparameter as often as desired**
+
+13. **Log into your wandb.ai account and see how your models compared**
+
+14. **See and track the performance of your model on wandb.ai**
+
 ## Milestone 3
 
 ### Overview
