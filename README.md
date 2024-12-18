@@ -161,6 +161,33 @@ Assuming you completed all setup-steps from Milestone 1:
     `docker run mnist_app`
 
 
+## Milestone 3
+
+### Overview
+
+The goal of this milestone is to introduce a relational database that can store the input and output of our Neural Network. The database should be connected to our main python application through a Docker Network, which allows us to interact with it through it's host name (IP Address) and port.
+
+### Setup
+
+
+1. **Install Docker Compose**
+
+    If not installed kindly use the link below:
+
+    https://docs.docker.com/compose/gettingstarted/
+
+    However, if you are using Docker Desktop, and have completed all setups from the other Milestones above, kindly skip this step.
+
+2. **Clone the repository and open the respective directory in Visual Studio as stated in the Milestones above.**
+
+3. **Run Multi Docker Container Application**
+    
+    Run `docker-compose up`
+
+4. **Check the tables using PgAdmin**
+
+    If you would like to access the tables, you can access your localhost on port 5050 via your browser. This should redirect you to the login page. Here you can enter username 'admin@admin.com' and password 'admin'. This will the open the connection and you will be prompted to enter the database password, which is 'postgres'. Now you can use the interface to access the database.
+
 
 ## Milestone 4
 
@@ -196,33 +223,6 @@ Assuming you completed all setup-steps from Milestone 1-3:
     `docker run --env-file .env mnist_wandb`
 
 6. **See and track the performance of your model on wandb.ai**
-=======
-## Milestone 3
-
-### Overview
-
-The goal of this milestone is to introduce a relational database that can store the input and output of our Neural Network. The database should be connected to our main python application through a Docker Network, which allows us to interact with it through it's host name (IP Address) and port.
-
-### Setup
-
-
-1. **Install Docker Compose**
-
-    If not installed kindly use the link below:
-
-    https://docs.docker.com/compose/gettingstarted/
-
-    However, if you are using Docker Desktop, and have completed all setups from the other Milestones above, kindly skip this step.
-
-2. **Clone the repository and open the respective directory in Visual Studio as stated in the Milestones above.**
-
-3. **Run Multi Docker Container Application**
-    
-    Run `docker-compose up`
-
-4. **Check the tables using PgAdmin**
-
-    If you would like to access the tables, you can access your localhost on port 5050 via your browser. This should redirect you to the login page. Here you can enter username 'admin@admin.com' and password 'admin'. This will the open the connection and you will be prompted to enter the database password, which is 'postgres'. Now you can use the interface to access the database.
 
 
 ## Contributions
