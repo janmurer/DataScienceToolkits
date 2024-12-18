@@ -181,6 +181,7 @@ cython_debug/
 requirements.in
 
 
+
 # docker entrypoint
 # docker_entrypoint.sh
 postgres_data
@@ -188,4 +189,14 @@ postgres_data
 # postgres_data is a drectory that contains the internal files and data of the PostgreSQL database.
 postgres_data/
 postgres_data
+
+
+# postgres_data is a drectory that contains the internal files and data of the PostgreSQL database.
+postgres_data/
+postgres_data
+# docker entrypoint
+
+docker_entrypoint.sh
+
+# docker_entrypoint.sh
 

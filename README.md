@@ -161,6 +161,7 @@ Assuming you completed all setup-steps from Milestone 1:
     `docker run mnist_app`
 
 
+<<<<<<< HEAD
 ## Milestone 3
 
 ### Overview
@@ -188,6 +189,42 @@ The goal of this milestone is to introduce a relational database that can store 
 
     If you would like to access the tables, you can access your localhost on port 5050 via your browser. This should redirect you to the login page. Here you can enter username 'admin@admin.com' and password 'admin'. This will the open the connection and you will be prompted to enter the database password, which is 'postgres'. Now you can use the interface to access the database.
 
+=======
+## Milestone 4
+
+### Overview
+
+In this milestone we should create a wandb-account to essentially log and visualize the performance of our MNIST-model. 
+
+### Setup
+
+Assuming you completed all setup-steps from Milestone 1-3:
+
+
+1. **Clone the repository using**
+
+    `git clone https://github.com/janmurer/DataScienceToolkits.git`
+
+2. **Open the respective directory in Virtual Studio** 
+
+    This is the directory or folder where you cloned the repository into in File explorer. 
+
+3. **Store your wandb key in an .env file at the root of your directory**
+
+    `WANDB_TOKEN=YourActualWANDBAPIKey`
+
+    Make sure to never share/publish your token. Otherwhise bad things will happen. 
+
+4. **Build the Docker image**
+    
+    `docker build -f wandb/Dockerfile -t mnist_wandb .`
+
+5. **Run the Docker container**
+
+    `docker run --env-file .env mnist_wandb`
+
+6. **See and track the performance of your model on wandb.ai**
+>>>>>>> c82538e (update report_4.md, update README.md)
 
 ## Milestone 4
 
