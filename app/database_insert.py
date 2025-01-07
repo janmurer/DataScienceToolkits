@@ -86,12 +86,29 @@ def save_predictions_to_db(database, user, password, port, host, predictions, in
         if conn:
             conn.close()
 
-
-import sqlite3
-
 def save_to_db(prediction):
-    conn = sqlite3.connect('predictions.db')
-    cursor = conn.cursor()
-    cursor.execute('INSERT INTO predictions (prediction) VALUES (?)', (prediction,))
-    conn.commit()
-    conn.close()
+    try:
+        conn = psycopg2.connect(
+            database="milestone_3",
+            user="postgres",
+            password="postgres",
+            host="db",
+            port="5432"
+        )
+        cursor = conn.cursor()
+
+        # Ensure table exists
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS predictions (
+                id SERIAL PRIMARY KEY,
+                prediction INTEGER
+            )
+        ''')
+
+        cursor.execute('INSERT INTO predictions (prediction) VALUES (%s)', (prediction,))
+        conn.commit()
+    except Exception as e:
+        print(f"Error saving to PostgreSQL: {e}")
+    finally:
+        cursor.close()
+        conn.close()

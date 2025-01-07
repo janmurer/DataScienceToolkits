@@ -85,7 +85,7 @@ services:
         - WANDB_MODE=disabled
       volumes:
         - models_volume:/app/models
-      command: ["tail", "-f", "/dev/null"] 
+      command: ["python", "app/api.py"] 
       depends_on:
         - db
 
