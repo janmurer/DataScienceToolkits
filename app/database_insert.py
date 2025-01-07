@@ -85,3 +85,13 @@ def save_predictions_to_db(database, user, password, port, host, predictions, in
             cur.close()
         if conn:
             conn.close()
+
+
+import sqlite3
+
+def save_to_db(prediction):
+    conn = sqlite3.connect('predictions.db')
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO predictions (prediction) VALUES (?)', (prediction,))
+    conn.commit()
+    conn.close()
