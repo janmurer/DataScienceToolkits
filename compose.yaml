@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - PYTHONPATH=/app
     volumes:
@@ -73,6 +73,21 @@ services:
   #   ports:
   #     - "5433:5432"
   #   restart: always
+
+  flask_api:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - "5051:5000"
+      environment:
+        - PYTHONPATH=/app
+        - WANDB_MODE=disabled
+      volumes:
+        - models_volume:/app/models
+      command: ["tail", "-f", "/dev/null"] 
+      depends_on:
+        - db
 
 volumes:
   postgres_data:
