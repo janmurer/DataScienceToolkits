@@ -248,6 +248,17 @@ Assuming you completed all setup-steps from Milestone 1-3:
 14. **See and track the performance of your model on wandb.ai**
 
 
+## Milestone 5
+
+### Overview
+
+In this milestone we should integrate our previous work into a web application. We created a new script called api.py that accepts a POST Request and returns a prediction to the client. 
+
+### Setup
+
+Assuming you completed all setup-steps from Milestone 1-4:
+
+
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
 

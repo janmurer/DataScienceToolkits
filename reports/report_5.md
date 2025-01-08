@@ -1,3 +1,27 @@
+# Report "Data Science Toolkits and Architectures"
+#### Jan Murer, Frederik Poschenrieder, Jessica Ugowe 
+
+
+# Milestone_5
+
+## Task 2: Create a Flask Application
+
+### Challenge 1: Ports
+
+As already predicted in the lecture, we got confused by choosing the right ports to interact with our flask application. 
+
+To test the predictive capabilities of our application we used the terminal command:
+
+'curl -X POST http://localhost:5051/predict \
+-H "Content-Type: multipart/form-data" \
+-F "image=@test_img/image.png"'
+
+Depending on the image that was sent, the response of the application should look as follows:
+
+{
+  "prediction": X
+}
+
 Milestone 5
 Deadline: 17.1.2025 23:59
 In the previous lecture you learned about REST APIs and Web Servers. This project aims to integrate the work of the previous lectures into a Web application. Currently, we have a “Back-end” that consists of code that can run a model and store information in a Database. Furthermore, we trained and evaluated (and tracked experiments) some models that might be candidates for our Handwritten-digit classifier service. We would like to expose this functionality to “the world”.
