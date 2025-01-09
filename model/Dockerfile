@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/li
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+# Copy the current directory contents into the container at /app
+COPY ../model /app
+
 # Set environment variable to make sure Python looks for modules in /app
 ENV PYTHONPATH="/app"
 
