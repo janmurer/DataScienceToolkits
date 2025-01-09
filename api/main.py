@@ -35,13 +35,16 @@ def predict():
         image = cv2.resize(image, (28, 28)) / 255.0
         image = image.reshape(1, 28, 28, 1)
         image2 = prepare_image_for_db(image)
+        image2 = [(image2,)]
+
         save_input_data_to_db(database = database, user = user, host = host, password = password, port = port, image_data = image2)
 
         if model:
             predictions = np.argmax(model.predict(image), axis=1)
-            predictions = predictions[0]
-            save_predictions_to_db(database = database, user = user, host = host, password = password, port = port, predictions = predictions, input_data_ids = 1)
-            return jsonify({"prediction": int(predictions)})
+            input_data_ids = [1] * len(predictions)
+            predictions = predictions.tolist()
+            save_predictions_to_db(database = database, user = user, host = host, password = password, port = port, predictions = predictions, input_data_ids = input_data_ids)
+            return jsonify({"prediction": predictions})
         else:
             return jsonify({"error": "Model not loaded"}), 500
     except Exception as e:
