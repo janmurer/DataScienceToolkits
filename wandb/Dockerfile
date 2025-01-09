@@ -8,7 +8,7 @@ WORKDIR /wandb
 COPY . /wandb
 
 # Copy the main script
-COPY wandb /wandb
+COPY ../wandb /wandb
 
 # Set environment variable to make sure Python looks for modules in /app
 ENV PYTHONPATH="/wandb"
