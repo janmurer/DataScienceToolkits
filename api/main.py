@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify
 import numpy as np
 import cv2
-from model import load_trained_model 
-from database_insert import save_to_db
+from app import load_trained_model, save_to_db
 
 app = Flask(__name__)
 

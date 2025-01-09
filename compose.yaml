@@ -55,39 +55,29 @@ services:
       - pgadmin_data:/var/lib/pgadmin
       - ./pgadmin-servers.json:/pgadmin4/servers.json
 
-  # jokes:
-  #   build:
-  #     context: .
-  #     dockerfile: jokes/Dockerfile
-  #   ports:
-  #     - "8001:8000" 
-  #   environment:
-  #     - PYTHONPATH=/jokes
-
-  # db_jokes:
-  #   image: postgres:latest
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: ms3_jokes
-  #   ports:
-  #     - "5433:5432"
-  #   restart: always
-
+  # flask_api:
+  #     build:
+  #       context: .
+  #       dockerfile: Dockerfile
+  #     ports:
+  #       - "5051:5000"
+  #     environment:
+  #       - PYTHONPATH=/app
+  #       - WANDB_MODE=disabled
+  #     volumes:
+  #       - models_volume:/app/models
+  #     command: ["python", "app/api.py"] 
+  #     depends_on:
+  #       - db
+  
   flask_api:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      ports:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    ports:
         - "5051:5000"
-      environment:
-        - PYTHONPATH=/app
-        - WANDB_MODE=disabled
-      volumes:
-        - models_volume:/app/models
-      command: ["python", "app/api.py"] 
-      depends_on:
-        - db
+    volumes:
+      - models_volume:/app/models
 
 volumes:
   postgres_data:
