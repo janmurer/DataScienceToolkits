@@ -87,7 +87,7 @@ The goal of milestone_1 is to checkout code (https://github.com/keras-team/keras
 
 ### Setup
 
-1. **Install Virtual Studio** 
+1. **Install Visual Studio** 
 
     If not installed kindly use the link below:
 
@@ -257,6 +257,18 @@ In this milestone we should integrate our previous work into a web application. 
 ### Setup
 
 Assuming you completed all setup-steps from Milestone 1-4:
+
+1. **Clone the repository using**
+
+    `git clone https://github.com/janmurer/DataScienceToolkits.git`
+
+2. **Open the respective directory in Virtual Studio** 
+
+    This is the directory or folder where you cloned the repository into in File explorer. 
+
+3. **Build the Docker-Container**
+
+    `docker compose up`
 
 
 ## Contributions
