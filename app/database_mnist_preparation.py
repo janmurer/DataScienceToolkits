@@ -33,8 +33,8 @@ def prepare_mnist_data(x_data, y_data, sample_size=100):
     indices = np.random.choice(len(x_data), sample_size, replace=False)
     prepared_data = []
     for idx in indices:
-        image = (x_data[idx] * 255).astype("uint8").squeeze()  # Rescale to 0-255
+        image = (x_data[idx] * 255).astype("uint8").squeeze() 
         buffer = BytesIO()
-        Image.fromarray(image).save(buffer, format="PNG")  # Save as PNG
+        Image.fromarray(image).save(buffer, format="PNG")
         prepared_data.append((buffer.getvalue(), int(y_data[idx])))
     return prepared_data

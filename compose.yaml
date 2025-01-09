@@ -16,12 +16,12 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: milestone_3
+      POSTGRES_DB: predictions
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    healthcheck:  # Add a healthcheck for Postgres
+    healthcheck:  
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
@@ -35,9 +35,8 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/milestone_3
-    volumes:
-      - models_volume:/app/models  
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/predictions
+ 
 
   pgadmin:
     image: dpage/pgadmin4
@@ -54,21 +53,6 @@ services:
     volumes:
       - pgadmin_data:/var/lib/pgadmin
       - ./database/pgadmin-servers.json:/pgadmin4/servers.json
-
-  # flask_api:
-  #     build:
-  #       context: .
-  #       dockerfile: Dockerfile
-  #     ports:
-  #       - "5051:5000"
-  #     environment:
-  #       - PYTHONPATH=/app
-  #       - WANDB_MODE=disabled
-  #     volumes:
-  #       - models_volume:/app/models
-  #     command: ["python", "app/api.py"] 
-  #     depends_on:
-  #       - db
   
   flask_api:
     build:
@@ -78,6 +62,8 @@ services:
         - "5051:5000"
     volumes:
       - models_volume:/app/models
+    depends_on:
+      - db_app
 
 volumes:
   postgres_data:

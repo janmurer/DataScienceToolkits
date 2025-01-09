@@ -4,9 +4,9 @@ from PIL import Image
 from io import BytesIO
 import numpy as np
 
-def input_mnist_data(database, user, host, password, port, mnist_data):
+def save_input_data_to_db(database, user, host, password, port, image_data):
     """
-    Inserts MNIST data into the input_data table.
+    Inserts image data into the input_data table.
 
     Parameters:
         mnist_data (list of tuples): Prepared data [(image_binary, label), ...].
@@ -14,8 +14,8 @@ def input_mnist_data(database, user, host, password, port, mnist_data):
     try:
         conn = psycopg2.connect(database=database, user=user, host=host, password=password, port=port)
         cur = conn.cursor()
-        cur.execute("DELETE FROM input_data;")  # Optional: Clear table
-        cur.executemany("INSERT INTO input_data (image, true_value) VALUES (%s, %s);", mnist_data)
+        cur.execute("DELETE FROM input_data;")  
+        cur.executemany("INSERT INTO input_data (image) VALUES (%s, %s);", image_data)
         conn.commit()
         print("Data successfully inserted into the database.")
     except Exception as e:
@@ -85,30 +85,3 @@ def save_predictions_to_db(database, user, password, port, host, predictions, in
             cur.close()
         if conn:
             conn.close()
-
-def save_to_db(prediction):
-    try:
-        conn = psycopg2.connect(
-            database="milestone_3",
-            user="postgres",
-            password="postgres",
-            host="db",
-            port="5432"
-        )
-        cursor = conn.cursor()
-
-        # Ensure table exists
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS predictions (
-                id SERIAL PRIMARY KEY,
-                prediction INTEGER
-            )
-        ''')
-
-        cursor.execute('INSERT INTO predictions (prediction) VALUES (%s)', (prediction,))
-        conn.commit()
-    except Exception as e:
-        print(f"Error saving to PostgreSQL: {e}")
-    finally:
-        cursor.close()
-        conn.close()
