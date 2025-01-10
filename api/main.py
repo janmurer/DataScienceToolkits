@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import numpy as np
 import cv2
-from app import load_trained_model, save_predictions_to_db, save_input_data_to_db, predict, prepare_image_for_db
+from app import load_trained_model, save_predictions_to_db, save_input_data_to_db, prepare_image_for_db, load_data_from_db, transform_data_to_numpy
 
 
 database = "predictions"
@@ -22,8 +22,7 @@ except Exception as e:
     model = None 
 
 @app.route('/predict', methods=['POST'])
-
-def predict():
+def main():
     if 'image' not in request.files:
         return jsonify({"error": "No image uploaded"}), 400
 
@@ -37,19 +36,48 @@ def predict():
         image2 = prepare_image_for_db(image)
         image2 = [(image2,)]
 
-        save_input_data_to_db(database = database, user = user, host = host, password = password, port = port, image_data = image2)
+        save_input_data_to_db(
+            database=database, 
+            user=user, 
+            host=host, 
+            password=password, 
+            port=port, 
+            image_data=image2
+        )
+
+        fetched_data = load_data_from_db(
+            database=database, 
+            user=user, 
+            host=host, 
+            password=password, 
+            port=port
+        )
+
+        x_data, ids = transform_data_to_numpy(fetched_data)
 
         if model:
-            predictions = np.argmax(model.predict(image), axis=1)
-            input_data_ids = [1] * len(predictions)
-            predictions = predictions.tolist()
-            save_predictions_to_db(database = database, user = user, host = host, password = password, port = port, predictions = predictions, input_data_ids = input_data_ids)
-            return jsonify({"prediction": predictions})
+            predicted_labels = model.predict(x_data)
+            predicted_labels = np.argmax(predicted_labels, axis=1)
+            print("Prediction of first value:", predicted_labels[0])
+
+            print("Saving results to database")
+            save_predictions_to_db(
+                database=database, 
+                user=user, 
+                password=password, 
+                port=port, 
+                host=host, 
+                predictions=predicted_labels, 
+                input_data_ids=ids
+            )
+            # Return a success response with predictions
+            return jsonify({"predictions": predicted_labels.tolist()}), 200
         else:
             return jsonify({"error": "Model not loaded"}), 500
     except Exception as e:
         print(f"Error during prediction: {e}")
         return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     print("Starting Flask server...")
