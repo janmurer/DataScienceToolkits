@@ -54,10 +54,10 @@ services:
       - pgadmin_data:/var/lib/pgadmin
       - ./database/pgadmin-servers.json:/pgadmin4/servers.json
   
-  flask_api:
+  flask_webservice:
     build:
       context: .
-      dockerfile: api/Dockerfile
+      dockerfile: webservice/Dockerfile
     ports:
         - "5051:5000"
     volumes:

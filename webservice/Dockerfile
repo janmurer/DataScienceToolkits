@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/li
 COPY ../app /app/app
 
 # Copy the main script
-COPY ../api /app
+COPY ../webservice /app
 
 # Copy requirements.txt from the parent directory to the container
 COPY requirements.txt /app/requirements.txt
