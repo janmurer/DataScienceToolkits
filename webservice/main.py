@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template
 import numpy as np
 import cv2
 from app import load_trained_model, save_predictions_to_db, save_input_data_to_db, prepare_image_for_db, load_data_from_db, transform_data_to_numpy, predictor
@@ -26,6 +27,9 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'image' not in request.files:
+        error_message = {"error": "No image uploaded"}
+        if request.accept_mimetypes.best == "application/json":
+            return jsonify(error_message), 400
         return render_template('result.html', prediction="No image uploaded")
 
     try:
@@ -70,12 +74,19 @@ def predict():
                 input_data_ids=ids
             )
 
-            # Render the result page with the prediction
-            return render_template('result.html', prediction=predicted_labels[0])
+            # Return JSON response if requested, otherwise render HTML
+            if request.accept_mimetypes.best == "application/json":
+                return jsonify({"prediction": int(predicted_labels[0])})
+            return render_template('result.html', prediction=int(predicted_labels[0]))
         else:
+            error_message = {"error": "Model not loaded"}
+            if request.accept_mimetypes.best == "application/json":
+                return jsonify(error_message), 500
             return render_template('result.html', prediction="Model not loaded")
     except Exception as e:
-        print(f"Error during prediction: {e}")
+        error_message = {"error": str(e)}
+        if request.accept_mimetypes.best == "application/json":
+            return jsonify(error_message), 500
         return render_template('result.html', prediction=f"Error: {str(e)}")
 
 

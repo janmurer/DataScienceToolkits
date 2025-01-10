@@ -270,6 +270,28 @@ Assuming you completed all setup-steps from Milestone 1-4:
 
     `docker compose up`
 
+    *Note:*
+
+    If you run the command for the first time, building will take a few minutes. This is because the model needs to be trained first. Also all neccessary databases need to be initialized. 
+    
+    If you run the command `docker compose up` again, and the volume where the trained model is stored still exists, you can start using the webservice right away. 
+
+4. **Interact with the Webservice**
+
+    - To interact with the webservice you can either use the Webinterface that is accessible at port 5051 and upload an image from your machine to get a number predicted. E.g., If you are hosting the service on your local machine, use your web browser of choice and visit http://localhost:5051/ (or the according equivalent for your operating system).
+
+    - You can also interact with the webservice using your terminal. Use the command
+    `curl -X POST http://localhost:5051/predict \
+        -H "Content-Type: multipart/form-data" \
+        -F "image=@/path/to/your/image.png" \
+        -H "Accept: application/json"`
+    
+    This will return the prediction in json-structure. Only send .png-images and .jpeg-images, as these are the only filetypes accepted by the service. 
+
+5. **Database**
+
+    If you for whatever reason want to check the database, use port 5050. This will take you to pgAdmin, where you first have to sign in. You will be prompted to enter the database password, which is "postgres". You will find a database called predictions, which contains two tables. The table "input_data" stores the latest provided image, while the table "predictions" stores the latest corresponding prediction.
+
 
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
