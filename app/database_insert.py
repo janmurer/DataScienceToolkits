@@ -4,9 +4,9 @@ from PIL import Image
 from io import BytesIO
 import numpy as np
 
-def input_mnist_data(database, user, host, password, port, mnist_data):
+def save_input_data_to_db(database, user, host, password, port, image_data):
     """
-    Inserts MNIST data into the input_data table.
+    Inserts image data into the input_data table.
 
     Parameters:
         mnist_data (list of tuples): Prepared data [(image_binary, label), ...].
@@ -14,8 +14,8 @@ def input_mnist_data(database, user, host, password, port, mnist_data):
     try:
         conn = psycopg2.connect(database=database, user=user, host=host, password=password, port=port)
         cur = conn.cursor()
-        cur.execute("DELETE FROM input_data;")  # Optional: Clear table
-        cur.executemany("INSERT INTO input_data (image, true_value) VALUES (%s, %s);", mnist_data)
+        cur.execute("DELETE FROM input_data;")  
+        cur.executemany("INSERT INTO input_data (image) VALUES (%s);", image_data)
         conn.commit()
         print("Data successfully inserted into the database.")
     except Exception as e:
@@ -51,6 +51,7 @@ def save_predictions_to_db(database, user, password, port, host, predictions, in
         # Convert inputs to standard Python types
         predictions = [int(pred) for pred in predictions]
         input_data_ids = [int(record_id) for record_id in input_data_ids]
+ 
 
         # Connect to PostgreSQL
         conn = psycopg2.connect(

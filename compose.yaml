@@ -2,9 +2,9 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: model/Dockerfile
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - PYTHONPATH=/app
     volumes:
@@ -16,12 +16,12 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: milestone_3
+      POSTGRES_DB: predictions
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    healthcheck:  # Add a healthcheck for Postgres
+    healthcheck:  
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
@@ -35,9 +35,8 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/milestone_3
-    volumes:
-      - models_volume:/app/models  
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/predictions
+ 
 
   pgadmin:
     image: dpage/pgadmin4
@@ -53,26 +52,18 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
       - pgadmin_data:/var/lib/pgadmin
-      - ./pgadmin-servers.json:/pgadmin4/servers.json
-
-  # jokes:
-  #   build:
-  #     context: .
-  #     dockerfile: jokes/Dockerfile
-  #   ports:
-  #     - "8001:8000" 
-  #   environment:
-  #     - PYTHONPATH=/jokes
-
-  # db_jokes:
-  #   image: postgres:latest
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: ms3_jokes
-  #   ports:
-  #     - "5433:5432"
-  #   restart: always
+      - ./database/pgadmin-servers.json:/pgadmin4/servers.json
+  
+  flask_webservice:
+    build:
+      context: .
+      dockerfile: webservice/Dockerfile
+    ports:
+        - "5051:5000"
+    volumes:
+      - models_volume:/app/models
+    depends_on:
+      - db_app
 
 volumes:
   postgres_data:

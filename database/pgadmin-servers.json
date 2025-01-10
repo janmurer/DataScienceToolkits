@@ -5,7 +5,7 @@
             "Group": "Servers",
             "Host": "db",
             "Port": 5432,
-            "MaintenanceDB": "milestone_3",
+            "MaintenanceDB": "predictions",
             "Username": "postgres",
             "Password": "postgres",
             "SSLMode": "prefer",

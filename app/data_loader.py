@@ -27,12 +27,12 @@ def load_data_from_db(database, user, host, password, port):
     Fetches all data from the input_data table.
 
     Returns:
-        list of tuples: [(id, image_binary, true_value), ...]
+        list of tuples: [(id, image_binary), ...]
     """
     try:
         conn = psycopg2.connect(database=database, user=user, host=host, password=password, port=port)
         cur = conn.cursor()
-        cur.execute("SELECT id, image, true_value FROM input_data;")
+        cur.execute("SELECT id, image FROM input_data;")
         data = cur.fetchall()
         print(f"Fetched {len(data)} rows from the database.")
         return data
@@ -51,20 +51,18 @@ def transform_data_to_numpy(fetched_data):
     Transforms binary images and labels into NumPy arrays.
 
     Returns:
-        tuple: (x_data, y_data, ids)
+        tuple: (x_data, ids)
     """
-    images, labels, ids = [], [], []
-    for record_id, image_binary, label in fetched_data:
+    images, ids = [], []
+    for record_id, image_binary in fetched_data:
         try:
             buffer = BytesIO(image_binary)
             image = np.array(Image.open(buffer).convert("L"))  # Grayscale
             images.append(image.astype("float32") / 255.0)
-            labels.append(label)
             ids.append(record_id)
         except Exception as e:
             print(f"Failed to process image ID {record_id}: {e}")
             continue
     x_data = np.expand_dims(np.array(images), axis=-1)  # Reshape to (N, 28, 28, 1)
-    y_data = to_categorical(np.array(labels), 10)
     ids = np.array(ids)
-    return x_data, y_data, ids
+    return x_data, ids
