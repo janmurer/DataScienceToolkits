@@ -3,7 +3,7 @@
 # Import functions from each module to simplify access at the package level
 from .data_loader import load_data, load_data_from_db, transform_data_to_numpy
 from .model import build_model, load_trained_model, save_model
-from .predictor import predict
+from .predictor import predictor
 from .trainer import compile_model, evaluate_model, train_model
 from .jokes_functions import setup_jokes_database, fetch_first_joke
 from .database_creation import setup_database

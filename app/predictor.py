@@ -1,7 +1,7 @@
 # app/predictor.py
 import numpy as np
 
-def predict(loaded_model, x_data):
+def predictor(loaded_model, x_data):
     """
     Uses the loaded model to predict the class labels for the given input data.
 

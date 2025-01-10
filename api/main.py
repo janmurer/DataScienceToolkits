@@ -1,15 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template, redirect, url_for
 import numpy as np
 import cv2
-from app import load_trained_model, save_predictions_to_db, save_input_data_to_db, prepare_image_for_db, load_data_from_db, transform_data_to_numpy
-
+from app import load_trained_model, save_predictions_to_db, save_input_data_to_db, prepare_image_for_db, load_data_from_db, transform_data_to_numpy, predictor
 
 database = "predictions"
 user = "postgres"
 password = "postgres"
 port = 5432
 host = "db"
-
 
 app = Flask(__name__)
 
@@ -21,30 +19,31 @@ except Exception as e:
     print(f"Error loading model: {e}")
     model = None 
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/predict', methods=['POST'])
-def main():
+def predict():
     if 'image' not in request.files:
-        return jsonify({"error": "No image uploaded"}), 400
+        return render_template('result.html', prediction="No image uploaded")
 
     try:
+        # Prepare the image for database insertion
         image_file = request.files['image']
-        image_bytes = image_file.read()
-        image_np = np.frombuffer(image_bytes, np.uint8)
-        image = cv2.imdecode(image_np, cv2.IMREAD_GRAYSCALE)
-        image = cv2.resize(image, (28, 28)) / 255.0
-        image = image.reshape(1, 28, 28, 1)
-        image2 = prepare_image_for_db(image)
-        image2 = [(image2,)]
+        image_data = prepare_image_for_db(image_file)
 
+        # Save the prepared image to the database
         save_input_data_to_db(
             database=database, 
             user=user, 
             host=host, 
             password=password, 
             port=port, 
-            image_data=image2
+            image_data=image_data
         )
 
+        # Fetch the data from the database for prediction
         fetched_data = load_data_from_db(
             database=database, 
             user=user, 
@@ -56,11 +55,11 @@ def main():
         x_data, ids = transform_data_to_numpy(fetched_data)
 
         if model:
-            predicted_labels = model.predict(x_data)
-            predicted_labels = np.argmax(predicted_labels, axis=1)
+            # Make predictions using the model
+            predicted_labels = predictor(model, x_data)
             print("Prediction of first value:", predicted_labels[0])
 
-            print("Saving results to database")
+            # Save predictions to the database
             save_predictions_to_db(
                 database=database, 
                 user=user, 
@@ -70,13 +69,14 @@ def main():
                 predictions=predicted_labels, 
                 input_data_ids=ids
             )
-            # Return a success response with predictions
-            return jsonify({"predictions": predicted_labels.tolist()}), 200
+
+            # Render the result page with the prediction
+            return render_template('result.html', prediction=predicted_labels[0])
         else:
-            return jsonify({"error": "Model not loaded"}), 500
+            return render_template('result.html', prediction="Model not loaded")
     except Exception as e:
         print(f"Error during prediction: {e}")
-        return jsonify({"error": str(e)}), 500
+        return render_template('result.html', prediction=f"Error: {str(e)}")
 
 
 if __name__ == "__main__":
