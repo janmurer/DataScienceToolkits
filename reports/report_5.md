@@ -8,19 +8,15 @@
 
 ### Challenge 1: Ports
 
-As already predicted in the lecture, we got confused by choosing the right ports to interact with our flask application. 
+As already predicted in the lecture, we got confused by choosing the right ports to interact with our flask application. Also one group member was having issues with ports that were already blocked. This issue could only be resolved by changing the respective ports, as killing the process that blocked the port was not possible. 
 
-To test the predictive capabilities of our application we used the terminal command:
+### Challenge 2: Database adaption / Reusing previously created functions
 
-'curl -X POST http://localhost:5051/predict \
--H "Content-Type: multipart/form-data" \
--F "image=@test_img/image.png"'
+Renaming the existing database and adapting the previously created functions to the new milestone was quite timeconsuming, as debugging required rebuilding the whole container. 
 
-Depending on the image that was sent, the response of the application should look as follows:
+### Challenge 3: Lack of global variables
 
-{
-  "prediction": X
-}
+Maintenance of the code became increasingly difficult, as some environnement variables were not set globally. The project would certainly benefit of restructuring for easier maintenance. 
 
 Milestone 5
 Deadline: 17.1.2025 23:59

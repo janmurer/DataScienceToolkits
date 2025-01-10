@@ -295,21 +295,3 @@ Assuming you completed all setup-steps from Milestone 1-4:
 
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
