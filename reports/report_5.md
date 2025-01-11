@@ -8,17 +8,6 @@ This milestone involves building and deploying a Flask application with a neural
 
 ## Tasks Overview
 
-<<<<<<< HEAD
-As already predicted in the lecture, we got confused by choosing the right ports to interact with our flask application. Also one group member was having issues with ports that were already blocked. This issue could only be resolved by changing the respective ports, as killing the process that blocked the port was not possible. 
-
-### Challenge 2: Database adaption / Reusing previously created functions
-
-Renaming the existing database and adapting the previously created functions to the new milestone was quite timeconsuming, as debugging required rebuilding the whole container. 
-
-### Challenge 3: Lack of global variables
-
-Maintenance of the code became increasingly difficult, as some environnement variables were not set globally. The project would certainly benefit of restructuring for easier maintenance. 
-=======
 ### Task 1: Flask Tutorial
 
 In this task, we completed a tutorial on how to build and deploy a Flask application using Docker. The tutorial used an Ubuntu 18.04 system. You can follow the [DigitalOcean Flask tutorial](https://www.digitalocean.com/community/tutorials/how-to-build-and-deploy-a-flask-application-using-docker-on-ubuntu-18-04) to understand the steps involved.
@@ -98,5 +87,6 @@ In this optional task, we added a simple front-end to the Flask application usin
 ## Conclusion
 
 This milestone concludes our project, where we developed and deployed a Flask application with a neural network for digit image prediction. Looking back on this project, we are really pleased with what we have accomplished. Working as a team of three taught us a lot: not just about the tech stuff like Flask, Docker, and machine learning, but also about how to divide work, help each other out when stuck, and bring different pieces together into one working system. Sure, there were some tough moments and plenty of debugging sessions, but that is part of what made finishing the project feel so rewarding. In the end, we built something we are genuinely proud of, and more importantly, something that works! It is pretty cool to see how all these different technologies we learnt about came together into a real, working application. 😎
->>>>>>> jessica_milestone5
+
+
 
