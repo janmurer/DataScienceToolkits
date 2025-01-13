@@ -13,6 +13,8 @@ The repository is organized as follows:
 │   ├── data_loader.py
 │   ├── database_creation.py
 │   ├── database_insert.py
+|   ├── database_mnist_preparation.py
+|   ├── image_prep.py
 │   ├── jokes_functions.py
 │   ├── model.py
 │   ├── one_hot_decoder.py
@@ -21,43 +23,52 @@ The repository is organized as follows:
 │
 ├── database/
 │   ├── Dockerfile
-│   └── main.py
+|   ├── main.py
+│   └── pgadmin-servers.json
 │
-├── jokes/
+├── model/
 │   ├── Dockerfile
 │   └── main.py
 │
-├── model/
-│   └── model.keras
-│
 ├── reports/
+|   ├── img/
+|   |    └── wandb_workspace.png
 │   ├── report_1.md
 │   ├── report_2.md
-│   └── report_3.md
+|   ├── report_3.md
+|   ├── report_4.md
+│   └── report_5.md
 │
 ├── src/
 │   ├── mnist_covnet.py
 │   ├── ms3_mnist_task3.py
 │   └── train_model.py
 │
+├── webservice/
+|   ├── templates/
+|   |   ├── index.html
+|   |   └── result.html
+│   ├── Dockerfile
+|   ├── main.py
+│   └── wait_for_model.sh
+|
 ├── .dockerignore
 ├── .gitignore
 ├── compose.yaml
-├── docker-compose.yml
-├── Dockerfile
-├── main.py
-├── pgadmin-servers.json
 ├── README.md
 ├── requirements.in
-├── requirements.txt
-└── wait_for_model.sh
+└── requirements.txt
 ```
     
 * app/: Contains all modules for our application to work
 * database/: Contains a docker file and a scrpit that handles the database operations. (Though it accesses functions from app/)
-* jokes/: Contains a dockerfile and a scrpit that handles the jokes database of task 2. Itz is not executed by default and has to be manually accessed by removing uncommenting the relevant chunks in the docker-compose file.
-* reports/: Contains markdown files documenting the process of our work on milestones and logs findings and challenges we faced completing the milestones
-* src/: Contains the foundational code for our application(mnist_covnet.py) and other scripts
+* model/: Contains a dockerfile and a scrpit that handles the process of training, saving, loading, and evaluating a machine learning model. 
+* reports/: Contains markdown files documenting the process of our work on milestones, logs findings and challenges we faced completing the milestones
+* src/: Contains the foundational code for our application(mnist_covnet.py) and other scripts.
+* webservice/: Sets up the foundation of our web-based application designed to interact with users through a web interface.
+* .dockerignore: Specifies files or directories to exclude when building the Docker image.
+* .gitignore: Lists files or folders that should not be tracked by Git.
+* compose.yaml: A multi-container environment for our machine learning web service, integrating model management, a PostgreSQL database, a Flask API, and PgAdmin via Docker Compose.
 * requirements.txt: List of packages and dependencies to run the application
 
 ## Getting Started
@@ -252,7 +263,7 @@ Assuming you completed all setup-steps from Milestone 1-3:
 
 ### Overview
 
-In this milestone we should integrate our previous work into a web application. We created a new script called api.py that accepts a POST Request and returns a prediction to the client. 
+In this milestone we integrated our previous work into a web application. We created a new script called api.py that accepts a POST Request and returns a prediction to the client. 
 
 ### Setup
 
@@ -268,7 +279,7 @@ Assuming you completed all setup-steps from Milestone 1-4:
 
 3. **Build the Docker-Container**
 
-    `docker compose up`
+    `docker-compose up`
 
     *Note:*
 
@@ -295,21 +306,3 @@ Assuming you completed all setup-steps from Milestone 1-4:
 
 ## Contributions
 This was carried out by Murer Jan, Ugowe Jessica and Poschenrieder Frederik. Feel free to send a pull request or create an issue if you feel there was something we could have done better. We would greatly appreciate learning from you. **T for Thanks.**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
