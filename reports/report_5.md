@@ -52,7 +52,7 @@ The entire application was dockerised and can be started with the following comm
 
 ### Task 3: Creating a Front-end using Flask templates
 
-In this optional task, we added a simple front-end to the Flask application using Flask templates. This allows users to upload an image from their local machine and view the neural network’s prediction on a web page.
+In this optional task, we added a simple front-end to the Flask application using Flask templates. This allows users to upload an image from their local machine and view the neural network’s prediction on a web page. In this task we really benefitted from our stable back-end infrastructure. The front-end was created extremely fast, compared to the other task. We created a simple flask app with only two routes, for which we used simple templates.
 
 #### Key Features
 
@@ -68,6 +68,7 @@ In this optional task, we added a simple front-end to the Flask application usin
 
 ---
 
+
 ## Challenges 
 
 1. Ports
@@ -76,11 +77,15 @@ In this optional task, we added a simple front-end to the Flask application usin
 
 2. Database adaption / Reusing previously created functions
 
-      Renaming the existing database and adapting the previously created functions to the new milestone was quite timeconsuming, as debugging required rebuilding the whole container. 
+      Renaming the existing database and adapting the previously created functions to the new milestone was quite time consuming, as debugging required rebuilding the whole container. 
 
 3. Lack of global variables
 
-      Maintenance of the code became increasingly difficult, as some environnement variables were not set globally. The project would certainly benefit of restructuring for easier maintenance. 
+      Maintenance of the code became increasingly difficult, as some environnement variables were not set globally. This mainly concerns the database access. The project would certainly benefit of restructuring for easier maintenance. 
+
+4. Adapting to changing requirements
+
+    It took quite some time for us to adapt to the changing requirements of the new task. We could for example not just reuse the existing database from milestones 3 and 4, as we had a different data structure (We had 'true values' to each immage, that we stored in the previous milestones, that we did not have in our external data now). The functions we have build needed quite some wiggling around to adapt to the new requirements. For future projects we would put more time into the whole process of preparing our functions, so they can better deal with future changes.
 
 ---
 
