@@ -87,10 +87,6 @@ The key dependencies for this task include **NumPy** for numerical operations, a
 
 - **Solution**: To prevent major mistakes such as accidentally wiping the system, we prefer using MacOS to complete the milestones. If passing a milestone requires the use of a Linux distribution we have virtual machines that emulate Fedora and Ubuntu. 
 
-
-## Conclusion
-This milestone not only familiarised us with the operational aspect of running deep learning scripts but also showed us the importance of having a stable development environent. Through teamwork, we were able to significantly deepen our understanding of neural network applications in image classification.
-
 ## References
 
 1. Digital Ocean: https://www.digitalocean.com/community/tutorials/mnist-dataset-in-python
