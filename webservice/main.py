@@ -11,6 +11,7 @@ port = 5432
 host = "db"
 
 app = Flask(__name__)
+app.config['DEBUG'] = False  # Disable debug mode
 
 try:
     print("Loading model...")
@@ -92,4 +93,4 @@ def predict():
 
 if __name__ == "__main__":
     print("Starting Flask server...")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
